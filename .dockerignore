@@ -1,0 +1,10 @@
+# Build context tetap kecil — yang dibutuhkan image hanya package.json, bun.lock, dan build/
+.git
+.svelte-kit
+node_modules
+src
+static
+.vscode
+README.md
+docker-compose.yaml
+Dockerfile

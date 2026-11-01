@@ -27,6 +27,18 @@ bun run build        # build produksi
 bun run preview      # pratinjau hasil build
 ```
 
+## Deployment (Docker)
+
+> `build/` di-`COPY` langsung ke image, jadi jalankan build sebelum docker build.
+
+```sh
+bun run build                # generate build/ (adapter-node)
+docker compose up -d --build # jalankan (host 8098 -> container 3000)
+```
+
+Dockerfile multi-stage: `oven/bun:1-alpine` untuk install dependencies produksi,
+`node:22-alpine` sebagai runtime (`node build`).
+
 ## Mengedit Data Halaman
 
 Daftar video ada di `src/lib/data/days.ts`:

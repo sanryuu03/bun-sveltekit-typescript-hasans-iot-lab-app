@@ -1,0 +1,11 @@
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: hasans-iot-lab
+    restart: always
+    ports:
+      - "8098:3000" # Expose frontend di port 8098 VPS -> port 3000 container
+    environment:
+      - PORT=3000
