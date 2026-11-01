@@ -1,56 +1,65 @@
-# sv
+# Hasan's IoT Lab — Jurnal Eksplorasi IoT
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+Landing page berbentuk **buku/album interaktif**: lima halaman (Day 1–5), setiap halaman berisi satu video dokumentasi perjalanan eksplorasi IoT.
 
-## Creating a project
+## Fitur
 
-If you're seeing this, you've probably already done this step. Congrats!
+- 📖 **Buku interaktif** — animasi balik halaman (3D flip)
+- 🖱️ **Navigasi klik tepi** — tepi kanan = halaman berikutnya, tepi kiri = halaman sebelumnya
+- 🔘 **Dot navigasi** — 5 dot di sisi kanan buku (dengan tooltip "Day N"), klik untuk lompat ke halaman mana pun
+- ⌨️ Navigasi keyboard (tombol panah kiri/kanan)
+- ▶️ **Video lazy-loading** — iframe YouTube baru dimuat saat tombol play diklik
 
-```sh
-# create a new project
-npx sv create my-app
-```
+## Tech Stack
 
-To recreate this project with the same configuration:
+- [SvelteKit](https://svelte.dev/docs/kit) + Svelte 5 (Runes)
+- [Tailwind CSS v4](https://tailwindcss.com)
+- [shadcn-svelte](https://shadcn-svelte.com) (Button, Card, Badge, Separator, Tooltip)
+- Build tool: Vite · Package manager: Bun
 
-```sh
-# recreate this project
-bun x sv@1.1.1 create --template minimal --types ts --install bun bun-sveltekit-typescript-hasans-iot-lab-app
-```
-
-## Adding features
-
-Add features to your project with `sv add`:
+## Menjalankan
 
 ```sh
-npx sv add
+bun install
+bun run dev          # server pengembangan
+bun run check        # type check (svelte-check)
+bun run build        # build produksi
+bun run preview      # pratinjau hasil build
 ```
 
-For example, to add Tailwind CSS:
+## Mengedit Data Halaman
 
-```sh
-npx sv add tailwindcss
+Daftar video ada di `src/lib/data/days.ts`:
+
+```ts
+export const days: Day[] = [
+  {
+    day: 1,
+    title: '…',
+    summary: '…',
+    videoId: '6G12yiwCpFg', // ID YouTube (bagian ?v=… pada URL)
+  },
+  // …
+];
 ```
 
-## Developing
+Tambah/kurangi entri sesuai kebutuhan — navigasi buku, jumlah dot, dan label halaman menyesuaikan secara otomatis.
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+## Struktur Proyek
 
-```sh
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+```
+src/
+├── lib/
+│   ├── components/
+│   │   ├── Book.svelte        # buku interaktif + animasi flip + navigasi
+│   │   ├── VideoEmbed.svelte  # pemutar YouTube (lazy)
+│   │   └── ui/                # komponen shadcn-svelte
+│   ├── data/days.ts           # data halaman (video per hari)
+│   └── utils.ts               # helper shadcn (cn)
+└── routes/
+    ├── +layout.svelte
+    ├── layout.css             # tema (CSS variables shadcn)
+    └── +page.svelte           # landing page
 ```
 
-## Building
-
-To create a production version of your app:
-
-```sh
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+> Catatan: proyek ini memakai alias `#lib` (bukan `$lib`) dan memaksa mode Runes Svelte 5 di `vite.config.ts`.

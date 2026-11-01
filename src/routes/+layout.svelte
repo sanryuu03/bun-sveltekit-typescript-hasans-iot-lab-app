@@ -1,6 +1,7 @@
 <script lang="ts">
 	import './layout.css';
 	import favicon from '#lib/assets/favicon.svg';
+	import { TooltipProvider } from '#lib/components/ui/tooltip';
 	import type { LayoutProps } from './$types';
 
 	let { children }: LayoutProps = $props();
@@ -10,4 +11,6 @@
 	<link rel="icon" href={favicon} />
 </svelte:head>
 
-{@render children()}
+<TooltipProvider>
+	{@render children()}
+</TooltipProvider>
