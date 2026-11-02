@@ -2,76 +2,159 @@
 
 Landing page berbentuk **buku/album interaktif**: lima halaman (Day 1–5), setiap halaman berisi satu video dokumentasi perjalanan eksplorasi IoT.
 
-## Fitur
+> Repo ini publik. Data project (judul, ringkasan, ID video) terpusat di satu file — silakan fork dan sesuaikan identitas/jurnal Anda sendiri.
 
-- 📖 **Buku interaktif** — animasi balik halaman (3D flip)
-- 🖱️ **Navigasi klik tepi** — tepi kanan = halaman berikutnya, tepi kiri = halaman sebelumnya
-- 🔘 **Dot navigasi** — 5 dot di sisi kanan buku (dengan tooltip "Day N"), klik untuk lompat ke halaman mana pun
-- ⌨️ Navigasi keyboard (tombol panah kiri/kanan)
-- ▶️ **Video lazy-loading** — iframe YouTube baru dimuat saat tombol play diklik
+---
 
-## Tech Stack
+## ✨ Fitur
 
-- [SvelteKit](https://svelte.dev/docs/kit) + Svelte 5 (Runes)
-- [Tailwind CSS v4](https://tailwindcss.com)
-- [shadcn-svelte](https://shadcn-svelte.com) (Button, Card, Badge, Separator, Tooltip)
-- Build tool: Vite · Package manager: Bun
+| Fitur | Detail |
+|---|---|
+| 📖 Buku interaktif | Animasi balik halaman 3D (leaf fold) + ilusi ketebalan tumpukan halaman di tepi kanan |
+| 🖱️ Klik tepi buku | Tepi kanan = halaman berikutnya, tepi kiri = halaman sebelumnya (ikon panah muncul saat hover) |
+| 🔘 Dot navigasi | **Desktop**: 5 dot vertikal di sisi kanan buku + tooltip "Day N". **Mobile**: bar dot horizontal + tombol prev/next di bawah buku |
+| ⌨️ Keyboard | Tombol panah ←/→ untuk mundur/maju |
+| 👆 Kenyamanan mobile | Tinggi halaman mengikuti isi (tanpa overflow), muat satu layar di 390×844 |
+| ▶️ Video lazy | Iframe YouTube baru dibuat saat tombol play diklik (hemat bandwidth, tidak ada autoplay paksa) |
+| 🔗 Mode `youtube-nocookie` | Privasi ramah + `rel=0`, `modestbranding=1` |
+| 🌗 Tema | Dark mode (dipaksa via `class="dark"` di `app.html`) dengan warna primary hijau tema |
+| ♿ Aksesibilitas | `aria-label` di seluruh kontrol, `aria-current` pada dot aktif, `svelte:head` title/meta description |
 
-## Menjalankan
+## 🧰 Tech Stack
+
+| Bagian | Teknologi |
+|---|---|
+| Framework | [SvelteKit 3](https://svelte.dev/docs/kit) + Svelte 5 (**Runes dipaksa aktif** via `vite.config.ts`) |
+| UI | [shadcn-svelte](https://shadcn-svelte.com) — Button, Card (+Action), Badge, Separator, Tooltip |
+| Styling | [Tailwind CSS v4](https://tailwindcss.com) (plugin Vite) |
+| Build | Vite 8 | 
+| Runtime | Node ≥ 22.17 · Package manager [Bun](https://bun.sh) |
+| Deploy | `@sveltejs/adapter-node` + Docker (multi-stage) |
+
+## 🚀 Menjalankan
 
 ```sh
 bun install
-bun run dev          # server pengembangan
-bun run check        # type check (svelte-check)
-bun run build        # build produksi
-bun run preview      # pratinjau hasil build
+bun run dev            # http://localhost:5280 (atau default vite)
+bun run dev --host     # agar bisa diakses dari HP di jaringan yang sama
+bun run check          # type check + komponen (svelte-check, harus 0 error)
+bun run build          # build produksi → build/
+bun run preview        # pratinjau hasil build produksi
 ```
 
-## Deployment (Docker)
-
-> `build/` di-`COPY` langsung ke image, jadi jalankan build sebelum docker build.
-
-```sh
-bun run build                # generate build/ (adapter-node)
-docker compose up -d --build # jalankan (host 8098 -> container 3000)
-```
-
-Dockerfile multi-stage: `oven/bun:1-alpine` untuk install dependencies produksi,
-`node:22-alpine` sebagai runtime (`node build`).
-
-## Mengedit Data Halaman
-
-Daftar video ada di `src/lib/data/days.ts`:
-
-```ts
-export const days: Day[] = [
-  {
-    day: 1,
-    title: '…',
-    summary: '…',
-    videoId: '6G12yiwCpFg', // ID YouTube (bagian ?v=… pada URL)
-  },
-  // …
-];
-```
-
-Tambah/kurangi entri sesuai kebutuhan — navigasi buku, jumlah dot, dan label halaman menyesuaikan secara otomatis.
-
-## Struktur Proyek
+## 📁 Struktur Proyek
 
 ```
 src/
 ├── lib/
 │   ├── components/
-│   │   ├── Book.svelte        # buku interaktif + animasi flip + navigasi
-│   │   ├── VideoEmbed.svelte  # pemutar YouTube (lazy)
-│   │   └── ui/                # komponen shadcn-svelte
-│   ├── data/days.ts           # data halaman (video per hari)
-│   └── utils.ts               # helper shadcn (cn)
+│   │   ├── Book.svelte        # buku interaktif: flip, dot, keyboard, zona klik tepi
+│   │   ├── VideoEmbed.svelte  # pemutar YouTube lazy (thumbnail → play → iframe)
+│   │   └── ui/                # komponen shadcn-svelte (button, card, badge, dsb.)
+│   ├── data/
+│   │   └── days.ts            # ☝️ SATU-SATUNYA file yang perlu diedit untuk konten
+│   └── utils.ts               # helper cn() milik shadcn
 └── routes/
-    ├── +layout.svelte
-    ├── layout.css             # tema (CSS variables shadcn)
-    └── +page.svelte           # landing page
+    ├── +layout.svelte         # import tema + TooltipProvider
+    ├── layout.css             # CSS variables tema shadcn (@theme inline)
+    ├── +page.svelte           # landing page (header, hero, footer, <Book/>)
+    └── +page.svelte           # meluas: juga diisi SEO di <svelte:head>
 ```
 
-> Catatan: proyek ini memakai alias `#lib` (bukan `$lib`) dan memaksa mode Runes Svelte 5 di `vite.config.ts`.
+File penting lain: `app.html` (`class="dark"`, `theme-color`), `favicon.svg` di `src/lib/assets`,
+`components.json` (konfigurasi shadcn CLI — alias sudah diset ke `#lib`), `Dockerfile`, `docker-compose.yaml`.
+
+## 📝 Mengedit Data Halaman
+
+Semua konten ada di `src/lib/data/days.ts`:
+
+```ts
+export interface Day {
+	day: number;      // nomor halaman (1, 2, 3, …)
+	title: string;    // judul di halaman buku
+	summary: string;  // 1–2 kalimat ringkasan (di-clamp 2 baris)
+	videoId: string;  // ID YouTube — bagian ?v=… dari URL watch
+}
+
+export const days: Day[] = [ /* … */ ];
+```
+
+- **Menambah/mengurangi hari**: cukup ubah isi array — jumlah dot, label halaman, navigasi, dan zona klik menyesuaikan otomatis.
+- **Cara ambil `videoId`**: dari `https://www.youtube.com/watch?v=`**`hbed7K6AWLA`** → `videoId: 'hbed7K6AWLA'`.
+- Thumbnail otomatis dari `i.ytimg.com/vi/<videoId>/hqdefault.jpg` (tidak perlu disimpan lokal).
+- Ringkasan disarankan ≤ 2 baris (deskripsi akan dipangkas `line-clamp-2` di layar kecil).
+
+## 📖 Arsitektur Buku (Book.svelte)
+
+```
+<section> (w-min(92vw,660px))
+ ├─ <nav> dot vertikal (desktop, absolute kanan)
+ ├─ .book  [perspective 1800px]
+ │   ├─ 2 layer tumpukan halaman (ilusi ketebalan)
+ │   ├─ .grid (tiling: semua halaman menempati sel sama)
+ │   │   ├─ {#key current} → halaman aktif  (+ kelas anim)
+ │   │   ├─ {#if leaving}   → halaman keluar (+ kelas anim), dihapus setelah animasi
+ │   │   └─ zona klik tepi kiri/kanan (absolute, z-30, 36px)
+ │   └─ (spine gradient di dalam halaman)
+ ├─ <nav> kontrol mobile (dot horizontal + prev/next)
+ └─ hint ketuk tepi (mobile saja)
+```
+
+### Mesin animasi (penting!)
+
+Animasi balik halaman **sengaja tidak memakai sistem transition Svelte** (`in:`/`out:`/`transition:`).
+Pada versi Svelte yang dipakai saat ini, elemen lama terbukti tetap tertinggal di DOM
+(ghost node yang menumpuk — terverifikasi lewat fixture minimal). Solusinya:
+
+1. Saat navigasi (`commit()`), halaman lama dipindahkan ke state `leaving`, halaman baru dirender via `{#key}`.
+2. Kedua halaman menumpuk di sel grid yang sama, urutan layar dikontrol **z-index** (`z-20` di atas), bukan urutan DOM.
+3. Animasi murni CSS keyframes:
+
+| Kelas | Arah | Peran |
+|---|---|---|
+| `anim-leaf-out` | maju | halaman lama melipat menjauh ke kiri (`rotateY 0 → −105°`, backface hidden) |
+| `anim-leaf-in` | mundur | halaman baru datang terlipat dari kiri (`rotateY −105° → 0`) |
+| `anim-reveal` | maju | halaman baru muncul halus di bawah daun |
+| `anim-fade-old` | mundur | halaman lama memudar di bawah daun |
+
+4. Setelah `640ms + 50ms`, `setTimeout` mengangkat `leaving` dari state → node lama dihapus dari DOM. Timer lama selalu di-`clearTimeout` setiap navigasi (aman untuk klik cepat beruntun).
+
+**Jangan kembalikan ke `in:`/`out:` milik Svelte** kecuali bug tersebut sudah dikonfirmasi terperbaiki — gunakan cara manual ini.
+
+## 🚢 Deployment (Docker)
+
+> ⚠️ Image meng-`COPY` folder `build/` — jadi **selalu jalankan build sebelum docker build**.
+
+```sh
+bun run build                 # generate build/ (adapter-node)
+docker compose up -d --build  # host :8098 → container :3000
+docker compose logs -f        # pantau log
+```
+
+- `Dockerfile` multi-stage: `oven/bun:1-alpine` (install deps produksi + lockfile frozen) → `node:22-alpine` (`node build`).
+- `docker-compose.yaml`: container `hasans-iot-lab`, `restart: always`, port **8098:3000**.
+- SvelteKit 3 butuh Node ≥ 22.17 — jangan downgrade ke `node:20` (project lama masih boleh, project ini tidak).
+- Ingin build di dalam container (tanpa `bun run build` manual)? Ubah stage `deps` menjadi build stage yang menjalankan `bun run build` lalu `COPY --from=build /app/build`. Pattern sekarang sengaja mengikuti project `sveltekit-my-portfolio` untuk konsistensi.
+- `.dockerignore` menjaga context kecil: yang dibutuhkan image hanya `package.json`, `bun.lock`, dan `build/`.
+
+## 🧩 Catatan Khusus Proyek Ini
+
+- **Alias `#lib`, bukan `$lib`** — SvelteKit 3 menghapus `$lib`; semua import memakai `#lib` (didukung `package.json` `imports`). Jika Anda menambah komponen shadcn lagi, `components.json` sudah diset ke `#lib`.
+- **Runes dipaksa aktif** melalui `compilerOptions.runes` di `vite.config.ts` — file component satu-gaya-runes; pengecualian hanya untuk `node_modules`.
+- Config svelte hidup di `vite.config.ts` (plugin `sveltekit()`), bukan `svelte.config.js`, karena project ini memakai setup template `sv` versi baru.
+- `bun run check` **wajib 0 error/0 warning** sebelum commit.
+- Favicon: tile hijau `--primary` + ikon chip (SVG inline otomatis sebagai data-URI oleh SvelteKit).
+
+## 🗺️ Roadmap Ide
+
+- [ ] Tanggal publikasi per halaman (timestamp sudah tersedia di judul video awal)
+- [ ] Prerender halaman (`export const prerender = true`) untuk SEO maksimal
+- [ ] Build di dalam Docker (hilangkan langkah build manual)
+- [ ] Halaman detail per Day (route `/day/[n]`) dengan deskripsi panjang
+- [ ] Pilihan bahasa (id/en)
+
+## 📄 Lisensi & Kredit
+
+Konten video merupakan milik channel **FullStackWith Hasan**.
+Kode template landing page bebas digunakan untuk keperluan non-komersial
+— silakan fork & jadikan jurnal digital Anda sendiri.
