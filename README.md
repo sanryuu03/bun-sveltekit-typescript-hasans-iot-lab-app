@@ -145,6 +145,50 @@ docker compose logs -f        # pantau log
 - `bun run check` **wajib 0 error/0 warning** sebelum commit.
 - Favicon: tile hijau `--primary` + ikon chip (SVG inline otomatis sebagai data-URI oleh SvelteKit).
 
+## 🧪 Stress Test Manual
+
+Halaman `src/routes/stress/+page.svelte` — alat verifikasi interaktif untuk mengecek sendiri apakah DOM tetap bersih (tidak ada elemen lama yang tertinggal) setelah berapa kali pun navigasi.
+
+```sh
+bun run dev
+# buka http://localhost:5280/stress
+```
+
+### Panel
+
+| Panel | Arti |
+|---|---|
+| **card sekarang** | jumlah halaman buku di DOM — target steady **1** |
+| **video embed** | jumlah `.aspect-video` — iframe YouTube hanya ada jika diputar |
+| **total DOM node** | total elemen dokumen — dipantau agar tidak tumbuh terus |
+| **puncak card** | nilai tertinggi card selama skenario — **≤ 2 wajar** (halaman aktif + daun keluar yang sedang beranimasi) |
+| **Log hasil** | riwayat skenario dengan status PASS/FAIL otomatis |
+
+### Skenario bawaan
+
+| Skenario | Apa yang diuji | Target akhir |
+|---|---|---|
+| Sweep maju ×5 | klik next berurutan @400ms | Hari Kelima |
+| Rapid-fire ×20 (0ms) | klik tercepat yang mungkin tanpa jeda | Hari Kelima |
+| Bolak-balik ×12 | next↔prev berselang @150ms | Hari Pertama |
+| Lompat dot 1→5→1 | lompatan jauh via dot, arah campuran | Hari Pertama |
+| Keyboard → ×2 | `KeyboardEvent` ArrowRight nyata | Hari Ketiga |
+
+**Kriteria PASS** (dicek otomatis setelah skenario selesai + 850ms jeda settle):
+1. Card yang tersisa di DOM === 1 (tidak ada elemen halaman lama yang tertinggal / bocor).
+2. Halaman akhir sesuai target skenario.
+3. Puncak card selama animasi ≤ 2 (wajar: halaman aktif + daun keluar).
+
+### Cara kerja & memutasi
+
+- Panel mengukur via DOM query setiap 200ms di dalam `$effect` (opsi disample: `[data-slot=card]`, `[data-slot=card-title]`, `.aspect-video`).
+- Skenario adalah **klik programatik nyata** (`el.click()` pada tombol/dot yang sama seperti interaksi manusia) — bukan manipulasi state internal, jadi yang diuji adalah perilaku aplikasi sungguhan.
+- Keyboard disimulasikan dengan `window.dispatchEvent(new KeyboardEvent('keydown', …))` agar terintersep di `svelte:window onkeydown` komponen `Book`.
+- **Menambah skenario baru**: tambahkan entri di array `scenarioDefs` (di atas `runScenario()`, bagian bawah file) — format `steps: [{ sel, delay, repeats }]`. `sel` bisa selector DOM (`aria-label`) atau `key:<nama-tombol>`.
+- Log dibatasi 12 entri terbaru; setiap skenario otomatis reset ke Day 1 sebelum dijalankan.
+
+> Rute ini utilitas dev: tidak diindeks (`noindex`), aman untuk dihapus, dan tidak memengaruhi landing page.
+
 ## 🗺️ Roadmap Ide
 
 - [ ] Tanggal publikasi per halaman (timestamp sudah tersedia di judul video awal)
