@@ -23,7 +23,7 @@
 		<div class="absolute -right-20 bottom-0 h-72 w-72 translate-x-1/3 translate-y-1/3 rounded-full bg-primary/10 blur-3xl"></div>
 	</div>
 
-	<header class="relative z-10 mx-auto flex w-full max-w-5xl items-center justify-between px-6 py-5">
+	<header class="relative z-10 mx-auto flex w-full max-w-5xl items-center justify-between px-6 py-3.5 sm:py-5">
 		<div class="flex items-center gap-2.5 text-left">
 			<span class="flex size-9 shrink-0 items-center justify-center rounded-lg bg-primary text-primary-foreground">
 				<RiCpuLine class="size-5" />
@@ -45,8 +45,8 @@
 		</Button>
 	</header>
 
-	<main class="relative z-10 mx-auto flex w-full max-w-5xl flex-1 flex-col items-center justify-center px-6 pb-12 text-center">
-		<Badge variant="outline" class="mb-4 gap-1.5 rounded-full px-3 py-1 shadow-sm">
+	<main class="relative z-10 mx-auto flex w-full max-w-5xl flex-1 flex-col items-center justify-center px-6 pb-6 text-center">
+		<Badge variant="outline" class="mb-3 gap-1.5 rounded-full px-3 py-1 shadow-sm">
 			<RiBookOpenLine class="size-3.5" />
 			Jurnal Eksplorasi · 5 Hari
 		</Badge>
@@ -59,7 +59,7 @@
 			tentu.
 		</p>
 
-		<div class="mt-10 flex w-full justify-center">
+		<div class="mt-5 flex w-full justify-center sm:mt-10">
 			<Book />
 		</div>
 	</main>
