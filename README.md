@@ -1,6 +1,9 @@
 # Hasan's IoT Lab — Jurnal Eksplorasi IoT
 
-Landing page berbentuk **buku/album interaktif**: halaman per hari (saat ini 8 halaman — Day 1–8), setiap halaman berisi satu video dokumentasi perjalanan eksplorasi IoT.
+[![Changelog](https://img.shields.io/badge/changelog-CHANGELOG.md-8A2BE2)](./CHANGELOG.md)
+[![Stress Test](https://img.shields.io/badge/uji-manual%20%2Fstress-brightgreen)](#-stress-test-manual)
+
+Landing page berbentuk **buku/album interaktif**: halaman per hari (jumlah mengikuti data terkini di `src/lib/data/days.ts` — saat ini 10 halaman, Day 1–10), setiap halaman berisi satu video dokumentasi perjalanan eksplorasi IoT.
 
 > Repo ini publik. Data project (judul, ringkasan, ID video) terpusat di satu file — silakan fork dan sesuaikan identitas/jurnal Anda sendiri.
 
