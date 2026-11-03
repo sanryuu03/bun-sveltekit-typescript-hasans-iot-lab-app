@@ -3,6 +3,7 @@
 	import RiCpuLine from 'remixicon-svelte/icons/cpu-line';
 	import RiGithubLine from 'remixicon-svelte/icons/github-line';
 	import Book from '#lib/components/Book.svelte';
+	import { days } from '#lib/data/days';
 	import Badge from '#lib/components/ui/badge/badge.svelte';
 	import Button from '#lib/components/ui/button/button.svelte';
 	import Separator from '#lib/components/ui/separator/separator.svelte';
@@ -12,7 +13,7 @@
 	<title>Hasan's IoT Lab — Jurnal Eksplorasi IoT</title>
 	<meta
 		name="description"
-		content="Jurnal eksplorasi IoT dalam bentuk buku interaktif — 5 halaman dokumentasi video perjalanan eksperimen."
+		content="Jurnal eksplorasi IoT dalam bentuk buku interaktif — halaman per hari berisi dokumentasi video perjalanan eksperimen."
 	/>
 </svelte:head>
 
@@ -48,13 +49,13 @@
 	<main class="relative z-10 mx-auto flex w-full max-w-5xl flex-1 flex-col items-center justify-center px-6 pb-6 text-center">
 		<Badge variant="outline" class="mb-3 gap-1.5 rounded-full px-3 py-1 shadow-sm">
 			<RiBookOpenLine class="size-3.5" />
-			Jurnal Eksplorasi · 5 Hari
+			Jurnal Eksplorasi · {days.length} Hari
 		</Badge>
 		<h1 class="text-balance text-3xl font-bold tracking-tight sm:text-4xl">
 			Perjalanan Eksplorasi IoT
 		</h1>
 		<p class="mt-3 max-w-md text-sm text-muted-foreground sm:text-base">
-			Lima halaman album berisi dokumentasi video perjalanan eksperimen IoT. Klik tepi kanan buku
+			{days.length} halaman album berisi dokumentasi video perjalanan eksperimen IoT. Klik tepi kanan buku
 			untuk lanjut, tepi kiri untuk kembali — atau pilih dot di sisi kanan untuk lompat ke halaman
 			tentu.
 		</p>

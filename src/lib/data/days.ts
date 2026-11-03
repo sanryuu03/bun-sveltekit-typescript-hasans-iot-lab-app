@@ -49,6 +49,24 @@ export const days: Day[] = [
 		summary: 'Dokumentasi video hari kelima perjalanan eksplorasi IoT di Hasan\'s IoT Lab.',
 		videoId: 'hbed7K6AWLA',
 	},
+	{
+		day: 6,
+		title: 'Perjalanan Eksplorasi IoT — Hari Keenam',
+		summary: 'Dokumentasi video hari keenam perjalanan eksplorasi IoT di Hasan\'s IoT Lab.',
+		videoId: 'qmFGfv2QJrk',
+	},
+	{
+		day: 7,
+		title: 'Perjalanan Eksplorasi IoT — Hari Ketujuh',
+		summary: 'Dokumentasi video hari ketujuh perjalanan eksplorasi IoT di Hasan\'s IoT Lab.',
+		videoId: '-Otda8b5Ugk',
+	},
+	{
+		day: 8,
+		title: 'Perjalanan Eksplorasi IoT — Hari Kedelapan',
+		summary: 'Dokumentasi video hari kedelapan perjalanan eksplorasi IoT di Hasan\'s IoT Lab.',
+		videoId: 'CzAnXtloUj8',
+	},
 ];
 
 /** URL watch YouTube dari ID video */

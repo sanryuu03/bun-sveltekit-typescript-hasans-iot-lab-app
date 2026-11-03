@@ -73,7 +73,7 @@
 
 <section class="@container relative mx-auto w-[min(92vw,660px)] select-none" aria-label="Jurnal perjalanan">
 	<!-- ---
-	Dot navigasi (5 dot) — vertikal di sisi kanan buku (desktop).
+	Dot navigasi (1 dot per halaman) — vertikal di sisi kanan buku (desktop).
 	--- -->
 	<nav class="absolute top-1/2 -right-12 z-30 hidden -translate-y-1/2 flex-col items-center gap-2.5 md:flex" aria-label="Navigasi halaman">
 		{#each pages as page, index (page.day)}

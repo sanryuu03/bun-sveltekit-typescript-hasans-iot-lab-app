@@ -1,6 +1,6 @@
 # Hasan's IoT Lab — Jurnal Eksplorasi IoT
 
-Landing page berbentuk **buku/album interaktif**: lima halaman (Day 1–5), setiap halaman berisi satu video dokumentasi perjalanan eksplorasi IoT.
+Landing page berbentuk **buku/album interaktif**: halaman per hari (saat ini 8 halaman — Day 1–8), setiap halaman berisi satu video dokumentasi perjalanan eksplorasi IoT.
 
 > Repo ini publik. Data project (judul, ringkasan, ID video) terpusat di satu file — silakan fork dan sesuaikan identitas/jurnal Anda sendiri.
 
@@ -12,7 +12,7 @@ Landing page berbentuk **buku/album interaktif**: lima halaman (Day 1–5), seti
 |---|---|
 | 📖 Buku interaktif | Animasi balik halaman 3D (leaf fold) + ilusi ketebalan tumpukan halaman di tepi kanan |
 | 🖱️ Klik tepi buku | Tepi kanan = halaman berikutnya, tepi kiri = halaman sebelumnya (ikon panah muncul saat hover) |
-| 🔘 Dot navigasi | **Desktop**: 5 dot vertikal di sisi kanan buku + tooltip "Day N". **Mobile**: bar dot horizontal + tombol prev/next di bawah buku |
+| 🔘 Dot navigasi | **Desktop**: vertikal di sisi kanan buku (1 dot per halaman) + tooltip "Day N". **Mobile**: bar dot horizontal + tombol prev/next di bawah buku |
 | ⌨️ Keyboard | Tombol panah ←/→ untuk mundur/maju |
 | 👆 Kenyamanan mobile | Tinggi halaman mengikuti isi (tanpa overflow), muat satu layar di 390×844 |
 | ▶️ Video lazy | Iframe YouTube baru dibuat saat tombol play diklik (hemat bandwidth, tidak ada autoplay paksa) |
