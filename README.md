@@ -192,13 +192,10 @@ bun run dev
 
 > Rute ini utilitas dev: tidak diindeks (`noindex`), aman untuk dihapus, dan tidak memengaruhi landing page.
 
-## 🗺️ Roadmap Ide
+## 🗺️ Ide & Backlog
 
-- [ ] Tanggal publikasi per halaman (timestamp sudah tersedia di judul video awal)
-- [ ] Prerender halaman (`export const prerender = true`) untuk SEO maksimal
-- [ ] Build di dalam Docker (hilangkan langkah build manual)
-- [ ] Halaman detail per Day (route `/day/[n]`) dengan deskripsi panjang
-- [ ] Pilihan bahasa (id/en)
+Semua ide pengembangan, saran, dan urutan eksekusinya terdokumentasi di **[docs/BACKLOG.md](./docs/BACKLOG.md)** —
+termasuk snapshot kondisi terkini dan checklist yang di-update berkala.
 
 ## 📄 Lisensi & Kredit
 
