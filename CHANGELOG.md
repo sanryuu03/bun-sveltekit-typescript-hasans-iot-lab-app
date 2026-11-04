@@ -5,6 +5,12 @@ Semua perubahan penting pada project **Hasan's IoT Lab** didokumentasikan di sin
 Format mengikuti [Keep a Changelog](https://keepachangelog.com/id-ID/1.1.0/),
 versi mengikuti [SemVer](https://semver.org/id/). Tanggal dalam format `d MMM yyyy` (WIB).
 
+## [0.15.0] — 4 Nov 2026
+
+### Added
+- **Day 15** — `9QfLGvqpoQU`
+- Jurnal sekarang 15 halaman (tiga minggu penuh eksplorasi!).
+
 ## [0.14.0] — 4 Nov 2026
 
 ### Added
