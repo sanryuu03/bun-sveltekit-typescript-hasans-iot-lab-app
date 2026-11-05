@@ -1,5 +1,7 @@
 # Hasan's IoT Lab — Jurnal Eksplorasi IoT
 
+[![CI](https://img.shields.io/badge/ci-github%20actions-success?logo=githubactions)](.github/workflows/ci.yml)
+[![License](https://img.shields.io/badge/license-MIT-blue)](./LICENSE)
 [![Changelog](https://img.shields.io/badge/changelog-CHANGELOG.md-8A2BE2)](./CHANGELOG.md)
 [![Stress Test](https://img.shields.io/badge/uji-manual%20%2Fstress-brightgreen)](#-stress-test-manual)
 
@@ -171,11 +173,15 @@ bun run dev
 
 | Skenario | Apa yang diuji | Target akhir |
 |---|---|---|
-| Sweep maju ×5 | klik next berurutan @400ms | Hari Kelima |
-| Rapid-fire ×20 (0ms) | klik tercepat yang mungkin tanpa jeda | Hari Kelima |
-| Bolak-balik ×12 | next↔prev berselang @150ms | Hari Pertama |
+| Sweep maju ×5 | klik next berurutan @800ms — setiap klik di luar window animasi | Hari Keenam |
+| Rapid-fire ×20 (0ms) | klik tercepat; hanya klik pertama diterima (guard C5) | Hari Kedua |
+| Bolak-balik ×12 | next↔prev berselang @800ms, netto 0 | Hari Pertama |
 | Lompat dot 1→5→1 | lompatan jauh via dot, arah campuran | Hari Pertama |
-| Keyboard → ×2 | `KeyboardEvent` ArrowRight nyata | Hari Ketiga |
+| Keyboard → ×2 | `KeyboardEvent` ArrowRight nyata; klik ke-2 di-debounce | Hari Kedua |
+
+> **Catatan C5 (debounce):** selama animasi keluar berjalan (~690ms), input navigasi
+> diabaikan — klik yang jatuh di tengah window tidak memotong animasi. Jeda semua skenario
+> di atas sudah diatur supaya deterministik terhadap window tersebut.
 
 **Kriteria PASS** (dicek otomatis setelah skenario selesai + 850ms jeda settle):
 1. Card yang tersisa di DOM === 1 (tidak ada elemen halaman lama yang tertinggal / bocor).
@@ -199,6 +205,5 @@ termasuk snapshot kondisi terkini dan checklist yang di-update berkala.
 
 ## 📄 Lisensi & Kredit
 
-Konten video merupakan milik channel **FullStackWith Hasan**.
-Kode template landing page bebas digunakan untuk keperluan non-komersial
-— silakan fork & jadikan jurnal digital Anda sendiri.
+Kode template: **[MIT](./LICENSE)** — bebas digunakan, dimodifikasi, dan di-distribusikan.
+Konten video merupakan milik channel **FullStackWith Hasan** — silakan fork & jadikan jurnal digital Anda sendiri.

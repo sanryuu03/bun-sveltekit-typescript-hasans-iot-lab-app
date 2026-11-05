@@ -1,20 +1,21 @@
 # 📌 Backlog & Catatan — Biar Tidak Lupa
 
 > Dokumen kerja (living doc). Update ini tiap kali ada keputusan baru atau saran baru.
-> Terakhir diperbarui: **4 Nov 2026** — kondisi saat jurnal 15 halaman.
+> Terakhir diperbarui: **5 Nov 2026** — jurnal 16 halaman + trio engineering (C1/C2/C3) dan C5 selesai.
 
 ---
 
-## 1️⃣ Snapshot Kondisi Saat Ini (4 Nov 2026)
+## 1️⃣ Snapshot Kondisi Saat Ini (5 Nov 2026)
 
 | Aspek | Kondisi |
 |---|---|
-| Jurnal | **15 halaman** (Day 1–15), semua video terverifikasi via YouTube oEmbed |
+| Jurnal | **16 halaman** (Day 1–16), semua video terverifikasi via YouTube oEmbed |
 | Stack | SvelteKit 3 · Svelte 5 (Runes dipaksa) · Tailwind CSS 4 · shadcn-svelte · Bun · Vite 8 |
 | Deploy | `adapter-node` + Docker multi-stage · `docker-compose` port **8098:3000** · container `hasans-iot-lab` |
-| Kualitas | `bun run check` 0 error/0 warning · stress test `/stress` PASS (DOM selalu 1 card, tanpa ghost) |
+| SEO & CI | Landing **prerendered** (`+page.ts`) · LICENSE MIT · GitHub Actions CI (`check` + `build`) |
+| Kualitas | `bun run check` 0 error/0 warning · stress test `/stress` PASS (DOM selalu 1 card) · debounce C5 aktif (~690ms) |
 | Mobile | Muat satu layar di 390×844, tanpa overflow horizontal/vertikal |
-| Dokumentasi | README lengkap · `CHANGELOG.md` (terakhir `[0.15.0]`) · halaman ini |
+| Dokumentasi | README lengkap · `CHANGELOG.md` (terakhir `[0.17.0]`) · halaman ini |
 | Workflow tambah Day | edit `src/lib/data/days.ts` → `bun run check` → commit `feat: tambah Day N` → entri `CHANGELOG [0.N.0]` → `git push` |
 
 **Data konten yang masih "generik":** semua `summary` di `days.ts` masih kalimat template
@@ -43,19 +44,22 @@
 
 ### ⚙️ C. Engineering
 
-- [ ] **C1. Prerender untuk SEO** — `export const prerender = true` di `+page.svelte` (halaman ini
-      statis, aman). Hasil: HTML penuh tersaji bagi crawler + load instan. 🟢 mudah
-- [ ] **C2. LICENSE file (MIT)** — README sekarang hanya menyebut "bebas non-komersial" secara verbal;
-      repo publik tanpa LICENSE secara hukum berarti "all rights reserved". Tentukan lalu taruh filenya. 🟢 mudah
-- [ ] **C3. GitHub Actions CI** — workflow 2 langkah: `bun install` → `bun run check` (dan optionally
-      `bun run build`) pada tiap push/PR. Menjaga kualitas commit pun jadi terverifikasi otomatis. 🟢 mudah
+- [x] **C1. Prerender untuk SEO** — ✅ selesai 5 Nov 2026: `src/routes/+page.ts` berisi
+      `export const prerender = true` (catatan: di Svelte versi ini opsi TIDAK boleh di
+      `+page.svelte` — ternyata diabaikan dengan warning; harus di `+page(.server).ts`).
+      Hasil: `build/prerendered/index.html` berisi HTML penuh 16 halaman sejak build.
+- [x] **C2. LICENSE file (MIT)** — ✅ selesai 5 Nov 2026: file `LICENSE` (MIT, © Muhammad Hasan);
+      README bagian Lisensi diperbarui + badge.
+- [x] **C3. GitHub Actions CI** — ✅ selesai 5 Nov 2026: `.github/workflows/ci.yml` — bun install
+      → `bun run check` → `bun run build` pada setiap push/PR ke main.
 - [ ] **C4. Build di dalam Docker** — pattern sekarang menyalin `build/` hasil build manual di host
       (konsisten dengan `sveltekit-my-portfolio`); risiko: lupa menjalankan `bun run build` setelah edit kode.
       Cara migrasinya: stage `oven/bun` menjalankan `bun run build` di dalam image; setelah itu
       `docker compose up --build` tanpa langkah manual apa pun. 🟡 sedang
-- [ ] **C5. Debounce klik saat animasi di tengah jalan** — kosmetik-murni: klik sangat cepat "memotong"
-      animasi (DOM tetap aman, DOM tetap bersih — stress test PASS aktif). Tambahkan guard paling
-      sederhana: abaikan input saat `leaving` belum selesai. 🟢 mudah
+- [x] **C5. Debounce klik saat animasi di tengah jalan** — ✅ selesai 5 Nov 2026: guard `animating`
+      di `Book.svelte` — commit navigasi diabaikan selama window animasi (~690ms). Dampak pada
+      `/stress`: interval skenario di-naikkan ke 800ms supaya deterministik (sudah diverifikasi
+      PASS 2 putaran; README tabel stress di-update).
 
 ### 📢 D. Distribusi
 
@@ -83,10 +87,10 @@
 
 Kalau mau satu "sprint kecil minggu-minggu ini":
 
-1. **A1** ringkasan spesifik 15 video (konten akhirnya setara dengan kerja rekamannya)
-2. **C1 prerender + C2 LICENSE + C3 CI** — tiga hal ringan, langsung mengangkat kualitas repo publik
+1. ~~**A1** ringkasan spesifik 15 video~~ → **masih jadi #1** (butuh catatan Anda saat menonton ulang video)
+2. ~~**C1 prerender + C2 LICENSE + C3 CI**~~ ✅ selesai 5 Nov
 3. **A3 playlist YouTube + D1 link-in-comment** — sebelum posting hero di LinkedIn
-4. **B2 TOC overlay** — saat merasa buku mulai menggelinding panjang
+4. **B2 TOC overlay** — saat merasa buku mulai menggelinding panjang (~Day 20)
 5. **B1 halaman detail** + **C4 build in-Docker** — ticket berikutnya
 
 > Prinsip: **A1 dulu** — dokumen konten (`days.ts`) adalah satu-satunya file yang akan terus

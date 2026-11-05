@@ -37,11 +37,16 @@
 
 	const ANIM_MS = 640;
 
+	/** C5 (docs/BACKLOG.md): selama animasi keluar berjalan, abaikan input navigasi baru
+	 *  — mencegah animasi terpotong di tengah (stress test tetap jadi pemeriksa utama). */
+	const animating = $derived(leaving !== null);
+
 	function clampIndex(index: number): number {
 		return Math.max(0, Math.min(total - 1, index));
 	}
 
 	function commit(target: number) {
+		if (animating) return; // guard debounce: jangan potong animasi yang sedang berjalan
 		dir = target > current ? 1 : -1;
 		// halaman lama jadi "daun keluar", dihapus dari DOM setelah animasi selesai
 		leaving = pages[current];

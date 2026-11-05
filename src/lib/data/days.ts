@@ -5,8 +5,7 @@
  *   - 🔴 [A1] Ringkasan per Day masih TEMPLATE GENERIK — lumayan mulai ditulis
  *     ringkasan spesifik per video (6–16, lalu tarik mundur ke 1–5) saat menonton ulang.
  *   - 🟠 [B2] Overlay TOC/daftar isi — layak dipasang saat jurnal ±20 halaman (Day 20).
- *   - 🟢 [C1+C2+C3] Prerender SEO + LICENSE (MIT) + GitHub Actions CI — tiga item ringan
- *     yang masih menunggu slot waktu.
+ *   - [C1 prerender] [C2 LICENSE] [C3 CI] [C5 debounce] ✅ selesai 5 Nov 2026 (lihat CHANGELOG 0.17.0).
  *   - Kalau sudah 18 halaman: mulai pertimbangkan B1 (route detail /day/[n]).
  *
  * Untuk menambah Day: cukup tambah entri di bawah — dot, badge, dan navigasi

@@ -30,7 +30,10 @@
 	interface ScenarioDef {
 		label: string;
 		desc: string;
+		/** hasil akhir yang diharapkan */
 		expect: string;
+		/** jeda tambahan setelah reset (ms) — dipakai agar langkah pertama jatuh di luar window animasi 690ms */
+		preDelay?: number;
 		steps: Step[];
 	}
 
@@ -92,7 +95,8 @@
 		try {
 			// reset: pastikan mulai dari Day 1
 			clickSel(SEL.dot(0));
-			await sleep(500);
+			// reset bisa memicu animasi (window 690ms) — dasar 800ms menempatkan langkah pertama di luarnya
+			await sleep(800 + (def.preDelay ?? 0));
 
 			for (const step of def.steps) {
 				const repeats = step.repeats ?? 1;
@@ -145,35 +149,36 @@
 	const scenarioDefs: ScenarioDef[] = [
 		{
 			label: 'Sweep maju ×5',
-			desc: 'Klik next berurutan, 400ms antar klik',
-			expect: 'Hari Kelima',
-			steps: nt(5, SEL.next, 400),
+			desc: 'Klik next berurutan, 800ms antar klik — semua di luar window animasi 690ms, setiap klik diterima',
+			expect: 'Hari Keenam',
+			steps: nt(5, SEL.next, 800),
 		},
 		{
 			label: 'Rapid-fire ×20 (0ms)',
-			desc: 'Klik next 20× tanpa jeda — klik tercepat yang mungkin',
-			expect: 'Hari Kelima',
+			desc: 'Klik next 20× tanpa jeda — hanya klik pertama diterima, sisanya di-debounce oleh guard C5',
+			expect: 'Hari Kedua',
 			steps: nt(20, SEL.next, 0),
 		},
 		{
 			label: 'Bolak-balik ×12',
-			desc: 'Next↔prev berselang 150ms',
+			desc: 'Next↔prev berselang 800ms — semua diterima, 6×+1 dan 6×−1 = netto 0',
 			expect: 'Hari Pertama',
-			steps: alternate(12, SEL.next, SEL.prev, 150),
+			steps: alternate(12, SEL.next, SEL.prev, 800),
 		},
 		{
 			label: 'Lompat dot 1→5→1',
-			desc: 'Lompatan jauh via dot, 500ms antar lompatan',
+			desc: 'Lompatan jauh via dot, 800ms antar lompatan (pasti di luar window animasi)',
 			expect: 'Hari Pertama',
 			steps: [
-				{ sel: SEL.dot(4), delay: 500 },
-				{ sel: SEL.dot(0), delay: 500 },
+				{ sel: SEL.dot(4), delay: 800 },
+				{ sel: SEL.dot(0), delay: 800 },
 			],
 		},
 		{
 			label: 'Keyboard → ×2',
-			desc: 'Simulasi tombol panah kanan (KeyboardEvent nyata)',
-			expect: 'Hari Ketiga',
+			desc: 'KeyboardEvent nyata ×2 berselang 500ms — klik kedua masuk window animasi lalu di-debounce',
+			expect: 'Hari Kedua',
+			preDelay: 200,
 			steps: [
 				{ sel: 'key:ArrowRight', delay: 500 },
 				{ sel: 'key:ArrowRight', delay: 500 },

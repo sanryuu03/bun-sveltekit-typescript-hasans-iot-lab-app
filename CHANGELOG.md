@@ -5,6 +5,21 @@ Semua perubahan penting pada project **Hasan's IoT Lab** didokumentasikan di sin
 Format mengikuti [Keep a Changelog](https://keepachangelog.com/id-ID/1.1.0/),
 versi mengikuti [SemVer](https://semver.org/id/). Tanggal dalam format `d MMM yyyy` (WIB).
 
+## [0.17.0] — 5 Nov 2026
+
+### Added
+- **C1 · Prerender SEO** — halaman landing di-prerender penuh (`src/routes/+page.ts`);
+  crawler dapat HTML 16 halaman sejak build, load instan.
+- **C2 · LICENSE (MIT)** — file `LICENSE`; README bagian lisensi + badge.
+- **C3 · GitHub Actions CI** — `.github/workflows/ci.yml`: `bun install` → `bun run check`
+  → `bun run build` di setiap push/PR ke main.
+- **C5 · Debounce navigasi** — klik selama animasi keluar (~690ms) kini diabaikan di `Book.svelte`;
+  skenario `/stress` dinaikkan jadanya 800ms agar deterministik (varifikasi PASS ×2 putaran).
+
+### Fixed
+- **Araah halaman pada opsi halaman Svelte**: `export const prerender` di `+page.svelte`
+  diabaikan diam-diam (warning) — pindah ke `+page.ts`.
+
 ## [0.16.0] — 5 Nov 2026
 
 ### Added
