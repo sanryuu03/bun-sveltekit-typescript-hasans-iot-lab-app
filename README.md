@@ -1,6 +1,6 @@
 # Hasan's IoT Lab — Jurnal Eksplorasi IoT
 
-[![CI](https://img.shields.io/badge/ci-github%20actions-success?logo=githubactions)](.github/workflows/ci.yml)
+[![CI](https://github.com/sanryuu03/bun-sveltekit-typescript-hasans-iot-lab-app/actions/workflows/ci.yml/badge.svg)](https://github.com/sanryuu03/bun-sveltekit-typescript-hasans-iot-lab-app/actions/workflows/ci.yml)
 [![License](https://img.shields.io/badge/license-MIT-blue)](./LICENSE)
 [![Changelog](https://img.shields.io/badge/changelog-CHANGELOG.md-8A2BE2)](./CHANGELOG.md)
 [![Stress Test](https://img.shields.io/badge/uji-manual%20%2Fstress-brightgreen)](#-stress-test-manual)
