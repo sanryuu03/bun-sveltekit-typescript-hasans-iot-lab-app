@@ -15,11 +15,12 @@
 | SEO & CI | Landing **prerendered** (`+page.ts`) · LICENSE MIT · GitHub Actions CI (`check` + `build`) |
 | Kualitas | `bun run check` 0 error/0 warning · stress test `/stress` PASS (DOM selalu 1 card) · debounce C5 aktif (~690ms) |
 | Mobile | Muat satu layar di 390×844, tanpa overflow horizontal/vertikal |
-| Dokumentasi | README lengkap · `CHANGELOG.md` (terakhir `[0.17.0]`) · halaman ini |
+| Dokumentasi | README lengkap · `CHANGELOG.md` (terakhir `[0.18.0]`) · halaman ini |
 | Workflow tambah Day | edit `src/lib/data/days.ts` → `bun run check` → commit `feat: tambah Day N` → entri `CHANGELOG [0.N.0]` → `git push` |
 
 **Data konten yang masih "generik":** semua `summary` di `days.ts` masih kalimat template
-("Dokumentasi video hari ke-N…") — hanya Judul & videoId yang sudah final.
+("Dokumentasi video hari ke-N…") — Judul, videoId, tanggal rekaman (`recordedAt`),
+dan topik (`topics`) sudah final/faktual; A1 hanya tersisa ringkasan naratif.
 
 ---
 
@@ -29,8 +30,11 @@
 
 - [ ] **A1. Tulis ringkasan spesifik per Day** — `summary` di `days.ts` masih template generik.
       Cukup 1–2 kalimat per video ("Day 4: wiring ESP32 pertama, kena error kabel TX-RX"). 🟢 mudah, 15 menit
-- [ ] **A2. Tanggal publikasi per halaman** — timestamp rekaman sudah tersedia (angka unix di
-      judul video awal, mis. `1790872050`). Tampilkan `2 Okt 2026` di header card + tooltip dot. 🟡 sedang
+- [x] **A2. Tanggal publikasi per halaman** — ✅ selesai 5 Nov 2026: field `recordedAt` (ISO, WIB)
+      & `topics` (dari hashtag deskripsi video) ditambah ke seluruh `Day` 1–16 via oEmbed/scrape
+      judul+deskripsi; tampil sebagai `🗓 1 Okt 2026` + badge topik di tiap kartu buku.
+      Fitur baris README + helper `recordedAtLabel()` di `days.ts`. Verifikasi: SSR + fit mobile
+      390×844 tetap 840px tanpa overflow. 🟢
 - [ ] **A3. Playlist YouTube "Day 1–15"** — satu link untuk semua video, memudahkan viewers & caption social. 🟢 mudah
 
 ### 🧭 B. Navigasi & Struktur (mulai dipikirkan saat halaman makin panjang)

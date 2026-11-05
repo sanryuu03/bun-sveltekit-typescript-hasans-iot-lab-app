@@ -5,6 +5,18 @@ Semua perubahan penting pada project **Hasan's IoT Lab** didokumentasikan di sin
 Format mengikuti [Keep a Changelog](https://keepachangelog.com/id-ID/1.1.0/),
 versi mengikuti [SemVer](https://semver.org/id/). Tanggal dalam format `d MMM yyyy` (WIB).
 
+## [0.18.0] — 5 Nov 2026
+
+### Added
+- **A2 · Metadata konten per halaman** — setiap `Day` kini membawa `recordedAt` (tanggal
+  rekaman WIB, dari timestamp judul video) dan `topics` (dari hashtag deskripsi YouTube)
+  untuk Day 1–16 — ditarik otomatis via oEmbed + scrape deskripsi.
+- Kartu buku menampilkan `🗓 <tanggal>` + badge topik (`arduino`, `esp32`, `touch-sensor`,
+  `servo`, `sg90`, `motor-sensor`...).
+- Helper `recordedAtLabel()` untuk format tanggal id-ID.
+- Verifikasi: `svelte-check` bersih, SSR HTML memuat tanggal/topik, fit mobile 390×844
+  tetap 840px tanpa overflow, sweep 3 halaman jalan normal.
+
 ## [0.17.0] — 5 Nov 2026
 
 ### Added

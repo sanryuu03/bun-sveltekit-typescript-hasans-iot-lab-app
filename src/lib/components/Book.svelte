@@ -17,7 +17,7 @@
 	import CardTitle from '#lib/components/ui/card/card-title.svelte';
 
 	import VideoEmbed from './VideoEmbed.svelte';
-	import { days, watchUrl, type Day } from '#lib/data/days';
+	import { days, watchUrl, recordedAtLabel, type Day } from '#lib/data/days';
 
 	/** Halaman-halaman buku; default: data jurnal 5 hari */
 	let { pages = days }: { pages?: Day[] } = $props();
@@ -231,6 +231,15 @@
 			</CardAction>
 			<CardTitle class="pr-2 text-lg leading-snug sm:text-xl @2xl:text-2xl">{page.title}</CardTitle>
 			<CardDescription class="line-clamp-2 max-w-prose">{page.summary}</CardDescription>
+			<!-- A2 (docs/BACKLOG.md): metrik konten — tanggal rekaman + topik dari deskripsi video -->
+			<div class="mt-2 flex flex-wrap items-center gap-1.5">
+				<span class="text-xs text-muted-foreground tabular-nums">🗓 {recordedAtLabel(page.recordedAt)}</span>
+				{#each page.topics as topic (topic)}
+					<Badge variant="outline" class="rounded-full px-2 py-0 text-[11px] font-normal text-muted-foreground">
+						{topic}
+					</Badge>
+				{/each}
+			</div>
 		</CardHeader>
 
 		<CardContent class="flex items-center justify-center px-5 py-0 sm:px-6">

@@ -16,6 +16,8 @@ Landing page berbentuk **buku/album interaktif**: halaman per hari (jumlah mengi
 | Fitur | Detail |
 |---|---|
 | 📖 Buku interaktif | Animasi balik halaman 3D (leaf fold) + ilusi ketebalan tumpukan halaman di tepi kanan |
+| 🧭 Prerender SEO | Landing page di-prerender saat build (`prerender = true`) — crawler dapat HTML penuh |
+| 📅 Metadata konten | Setiap halaman menampilkan **tanggal rekaman** + **topik** — diisi dari metadata YouTube (timestamp judul + hashtag deskripsi) |
 | 🖱️ Klik tepi buku | Tepi kanan = halaman berikutnya, tepi kiri = halaman sebelumnya (ikon panah muncul saat hover) |
 | 🔘 Dot navigasi | **Desktop**: vertikal di sisi kanan buku (1 dot per halaman) + tooltip "Day N". **Mobile**: bar dot horizontal + tombol prev/next di bawah buku |
 | ⌨️ Keyboard | Tombol panah ←/→ untuk mundur/maju |
