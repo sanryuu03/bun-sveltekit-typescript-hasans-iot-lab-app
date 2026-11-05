@@ -31,6 +31,29 @@
 	const atLast = $derived(current >= total - 1);
 	const active = $derived(pages[current]);
 
+	/** B2-lite (docs/BACKLOG.md): dot navigasi TIDAK lagi 1-per-halaman begitu banyaknya
+	 *  membesar — tepi Day 1 & Day terakhir selalu tampil, sekitar halaman aktif ±2,
+	 *  sisanya menjadi "…" (klik "…" = lompat kasar ke tengah celah). */
+	type DotItem = { kind: 'page'; page: number; index: number } | { kind: 'gap'; after: number; before: number };
+	const DOT_WINDOW = 2;
+	const dotNav = $derived.by<DotItem[]>(() => {
+		if (total <= 2 * DOT_WINDOW + 5) return pages.map((page, index) => ({ kind: 'page' as const, page: page.day, index }));
+		const activeDay = current + 1;
+		const visible = new Set<number>([1, total]);
+		for (let day = activeDay - DOT_WINDOW; day <= activeDay + DOT_WINDOW; day++) {
+			if (day >= 1 && day <= total) visible.add(day);
+		}
+		const days = [...visible].sort((a, b) => a - b);
+		const items: DotItem[] = [];
+		let prev = 0;
+		for (const day of days) {
+			if (prev && day - prev > 1) items.push({ kind: 'gap', after: prev, before: day });
+			items.push({ kind: 'page', page: day, index: day - 1 });
+			prev = day;
+		}
+		return items;
+	});
+
 	/** Halaman lama yang sedang dianimasikan keluar (di-rem manual setelah animasi selesai) */
 	let leaving: Day | null = $state(null);
 	let leavingTimer: ReturnType<typeof setTimeout> | undefined;
@@ -78,20 +101,31 @@
 
 <section class="@container relative mx-auto w-[min(92vw,660px)] select-none" aria-label="Jurnal perjalanan">
 	<!-- ---
-	Dot navigasi (1 dot per halaman) — vertikal di sisi kanan buku (desktop).
+	Dot navigasi (window: 1, ±2 dari halaman aktif, …, terakhir) — vertikal di sisi kanan buku (desktop).
 	--- -->
 	<nav class="absolute top-1/2 -right-12 z-30 hidden -translate-y-1/2 flex-col items-center gap-2.5 md:flex" aria-label="Navigasi halaman">
-		{#each pages as page, index (page.day)}
-			<TooltipRoot>
-				<TooltipTrigger onclick={() => goTo(index)}>
-					<span
-						aria-hidden="true"
-						class="block rounded-full transition-all duration-300 size-1.5
-							{index === current ? 'w-3 h-3 bg-primary' : 'bg-foreground/25 hover:bg-foreground/60'}"
-					></span>
-				</TooltipTrigger>
-				<TooltipContent side="right">Day {page.day}</TooltipContent>
-			</TooltipRoot>
+		{#each dotNav as item, index (index)}
+			{#if item.kind === 'page'}
+				<TooltipRoot>
+					<TooltipTrigger onclick={() => goTo(item.index)}>
+						<span
+							aria-hidden="true"
+							class="block rounded-full transition-all duration-300 size-1.5
+								{item.page === current + 1 ? 'w-3 h-3 bg-primary' : 'bg-foreground/25 hover:bg-foreground/60'}"
+						></span>
+					</TooltipTrigger>
+					<TooltipContent side="right">Day {item.page}</TooltipContent>
+				</TooltipRoot>
+			{:else}
+				<button
+					type="button"
+					class="h-2 text-[10px] leading-none tracking-widest text-foreground/40 tabular-nums transition-colors hover:text-primary"
+					onclick={() => goTo(Math.round((item.after + item.before) / 2) - 1)}
+					aria-label="Buka bagian Day {item.after + 1}–{item.before - 1}"
+				>
+					…
+				</button>
+			{/if}
 		{/each}
 	</nav>
 
@@ -184,20 +218,31 @@
 		</Button>
 
 		<div class="flex items-center gap-2.5 px-1">
-			{#each pages as page, index (page.day)}
-				<button
-					type="button"
-					class="flex size-4 items-center justify-center"
-					onclick={() => goTo(index)}
-					aria-label={`Ke halaman Day ${page.day}`}
-					aria-current={index === current ? 'page' : undefined}
-				>
-					<span
-						aria-hidden="true"
-						class="block rounded-full transition-all duration-300 size-1.5
-							{index === current ? 'w-3 h-3 bg-primary' : 'bg-foreground/25'}"
-					></span>
-				</button>
+			{#each dotNav as item, index (index)}
+				{#if item.kind === 'page'}
+					<button
+						type="button"
+						class="flex size-4 items-center justify-center"
+						onclick={() => goTo(item.index)}
+						aria-label={`Ke halaman Day ${item.page}`}
+						aria-current={item.index === current ? 'page' : undefined}
+					>
+						<span
+							aria-hidden="true"
+							class="block rounded-full transition-all duration-300 size-1.5
+								{current === item.index ? 'w-3 h-3 bg-primary' : 'bg-foreground/25'}"
+						></span>
+					</button>
+				{:else}
+					<button
+						type="button"
+						class="text-[10px] leading-none tracking-widest text-foreground/40 tabular-nums transition-colors hover:text-primary"
+						onclick={() => goTo(Math.round((item.after + item.before) / 2) - 1)}
+						aria-label="Buka bagian Day {item.after + 1}–{item.before - 1}"
+					>
+						…
+					</button>
+				{/if}
 			{/each}
 		</div>
 

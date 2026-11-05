@@ -5,6 +5,15 @@ Semua perubahan penting pada project **Hasan's IoT Lab** didokumentasikan di sin
 Format mengikuti [Keep a Changelog](https://keepachangelog.com/id-ID/1.1.0/),
 versi mengikuti [SemVer](https://semver.org/id/). Tanggal dalam format `d MMM yyyy` (WIB).
 
+## [0.19.0] — 5 Nov 2026
+
+### Added
+- **Dot navigasi window (B2-lite)** — dot tidak lagi 1-per-halaman jika jumlah halaman besar:
+  tepi (Day 1 & terakhir) selalu tampil, halaman aktif ±2, sisanya "…" yang dapat diklik
+  (lompat kasar ke tengah celah). Mobile `390×844` kini hanya 5–9 kontrol dot.
+  Verifikasi: window bergeser benar di Day 1/10/16; lompat via "…", fit mobile 840px,
+  5 skenario `/stress` PASS.
+
 ## [0.18.0] — 5 Nov 2026
 
 ### Added

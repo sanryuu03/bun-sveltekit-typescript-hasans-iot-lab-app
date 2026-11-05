@@ -21,7 +21,7 @@ Landing page berbentuk **buku/album interaktif**: halaman per hari (jumlah mengi
 | 🧭 Prerender SEO | Landing page di-prerender saat build (`prerender = true`) — crawler dapat HTML penuh |
 | 📅 Metadata konten | Setiap halaman menampilkan **tanggal rekaman** + **topik** — diisi dari metadata YouTube (timestamp judul + hashtag deskripsi) |
 | 🖱️ Klik tepi buku | Tepi kanan = halaman berikutnya, tepi kiri = halaman sebelumnya (ikon panah muncul saat hover) |
-| 🔘 Dot navigasi | **Desktop**: vertikal di sisi kanan buku (1 dot per halaman) + tooltip "Day N". **Mobile**: bar dot horizontal + tombol prev/next di bawah buku |
+| 🔘 Dot navigasi | **Window rapi**: dot Day 1 & terakhir + ±2 sekitar halaman aktif, sisanya "…" (klik "…" = lompat kasar). **Desktop**: vertikal di sisi buku + tooltip, **Mobile**: horizontal + prev/next |
 | ⌨️ Keyboard | Tombol panah ←/→ untuk mundur/maju |
 | 👆 Kenyamanan mobile | Tinggi halaman mengikuti isi (tanpa overflow), muat satu layar di 390×844 |
 | ▶️ Video lazy | Iframe YouTube baru dibuat saat tombol play diklik (hemat bandwidth, tidak ada autoplay paksa) |
@@ -202,7 +202,7 @@ bun run dev
 | Sweep maju ×5 | klik next berurutan @800ms — setiap klik di luar window animasi | Hari Keenam |
 | Rapid-fire ×20 (0ms) | klik tercepat; hanya klik pertama diterima (guard C5) | Hari Kedua |
 | Bolak-balik ×12 | next↔prev berselang @800ms, netto 0 | Hari Pertama |
-| Lompat dot 1→5→1 | lompatan jauh via dot, arah campuran | Hari Pertama |
+| Lompat dot 1→16→1 | lompatan jauh via dot tepi (1 & terakhir selalu tampil) | Hari Pertama |
 | Keyboard → ×2 | `KeyboardEvent` ArrowRight nyata; klik ke-2 di-debounce | Hari Kedua |
 
 > **Catatan C5 (debounce):** selama animasi keluar berjalan (~690ms), input navigasi

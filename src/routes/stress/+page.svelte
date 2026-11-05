@@ -16,8 +16,8 @@
 		next: '[aria-label="Halaman berikutnya"]',
 		prev: '[aria-label="Halaman sebelumnya"]',
 		title: '[data-slot="card-title"]',
-		dot: (index: number) =>
-			`[aria-label="Navigasi halaman (horizontal)"] > div > button:nth-child(${index + 1})`,
+		dot: (day: number) => `[aria-label="Ke halaman Day ${day}"]`,
+		gap: (a: number, b: number) => `[aria-label="Buka bagian Day ${a}–${b}"]`,
 	} as const;
 
 	interface Step {
@@ -94,7 +94,7 @@
 		const t0 = performance.now();
 		try {
 			// reset: pastikan mulai dari Day 1
-			clickSel(SEL.dot(0));
+			clickSel(SEL.dot(1));
 			// reset bisa memicu animasi (window 690ms) — dasar 800ms menempatkan langkah pertama di luarnya
 			await sleep(800 + (def.preDelay ?? 0));
 
@@ -166,12 +166,12 @@
 			steps: alternate(12, SEL.next, SEL.prev, 800),
 		},
 		{
-			label: 'Lompat dot 1→5→1',
-			desc: 'Lompatan jauh via dot, 800ms antar lompatan (pasti di luar window animasi)',
+			label: 'Lompat dot 1→16→1',
+			desc: 'Lompatan jauh via dot TEPAT (1 & terakhir selalu tampil di dot window), 800ms antar lompatan',
 			expect: 'Hari Pertama',
 			steps: [
-				{ sel: SEL.dot(4), delay: 800 },
-				{ sel: SEL.dot(0), delay: 800 },
+				{ sel: SEL.dot(16), delay: 800 },
+				{ sel: SEL.dot(1), delay: 800 },
 			],
 		},
 		{

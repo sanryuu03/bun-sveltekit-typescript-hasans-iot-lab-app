@@ -43,7 +43,9 @@ dan topik (`topics`) sudah final/faktual; A1 hanya tersisa ringkasan naratif.
       klik halaman buku → route dinamis dengan deskripsi panjang, foto, catatan teknis.
       Layak mulai dieksekusi kalau jurnal sudah **20–30+ halaman**. 🟡 sedang
 - [ ] **B2. TOC / daftar isi** — overlay menu (dropdown atau drawer) berisi semua Day,
-      jump cepat tanpa scroll dot 1-per-1. Sekarang adalah titik nyaman untuk menambahkan. 🟡 sedang
+      jump cepat tanpa scroll dot 1-per-1. ✅ *Update 5 Nov 2026*: kebutuhan intinya terpecah
+      parsial oleh **dot window** (tepi + ±2 + "…") di `Book.svelte` — layar tidak lagi penuh dot.
+      TOC sebagai penjelajah konten (daftar judul per Day) tetap layak ±Day 20. 🟡 sedang
 - [ ] **B3. i18n (id/en)** — teks UI + konten dua bahasa. SvelteKit punya pola `[lang]` route. 🔴 besar, tunda
 
 ### ⚙️ C. Engineering

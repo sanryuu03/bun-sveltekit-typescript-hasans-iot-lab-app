@@ -4,7 +4,8 @@
  * ⏰ PENGINGAT (dari docs/BACKLOG.md — update tiap kali buka file ini):
  *   - 🔴 [A1] Ringkasan per Day masih TEMPLATE GENERIK — lumayan mulai ditulis
  *     ringkasan spesifik per video (6–16, lalu tarik mundur ke 1–5) saat menonton ulang.
- *   - 🟠 [B2] Overlay TOC/daftar isi — layak dipasang saat jurnal ±20 halaman (Day 20).
+ *   - 🟠 [B2] Overlay TOC/daftar isi — sebagai penjelajah konten layak di ±Day 20
+ *     (sisi dot-nya sudah beres: dot window + "…" sejak 0.19.0).
  *   - [C1 prerender] [C2 LICENSE] [C3 CI] [C5 debounce] [A2 tanggal+topik] ✅ per 5 Nov 2026.
  *     (A2: recordedAt & topics diisi otomatis dari timestamp judul + hashtag deskripsi video
  *     via oEmbed/scrape utk seluruh Day 1–16 — Day baru WAJIB ikut mengisi dua field ini.)
