@@ -1,10 +1,19 @@
 /**
  * Data halaman "Jurnal Eksplorasi IoT".
  *
+ * ⏰ PENGINGAT (dari docs/BACKLOG.md — update tiap kali buka file ini):
+ *   - 🔴 [A1] Ringkasan per Day masih TEMPLATE GENERIK — lumayan mulai ditulis
+ *     ringkasan spesifik per video (6–16, lalu tarik mundur ke 1–5) saat menonton ulang.
+ *   - 🟠 [B2] Overlay TOC/daftar isi — layak dipasang saat jurnal ±20 halaman (Day 20).
+ *   - 🟢 [C1+C2+C3] Prerender SEO + LICENSE (MIT) + GitHub Actions CI — tiga item ringan
+ *     yang masih menunggu slot waktu.
+ *   - Kalau sudah 18 halaman: mulai pertimbangkan B1 (route detail /day/[n]).
+ *
+ * Untuk menambah Day: cukup tambah entri di bawah — dot, badge, dan navigasi
+ * menyesuaikan otomatis.
+ *
  * CATATAN (repo public):
  * Satu Halaman = satu hari eksplorasi = satu video YouTube.
- * Ringkasan di bawah masih berupa deskripsi umum per hari — silakan direvisi
- * agar sesuai isi video masing-masing.
  */
 
 export interface Day {
