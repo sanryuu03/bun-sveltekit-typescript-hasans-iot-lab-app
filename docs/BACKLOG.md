@@ -18,9 +18,8 @@
 | Dokumentasi | README lengkap · `CHANGELOG.md` (terakhir `[0.19.0]`) · halaman ini |
 | Workflow tambah Day | edit `src/lib/data/days.ts` → `bun run check` → commit `feat: tambah Day N` → entri `CHANGELOG [0.N.0]` → `git push` |
 
-**Data konten yang masih "generik":** semua `summary` di `days.ts` masih kalimat template
-("Dokumentasi video hari ke-N…") — Judul, videoId, tanggal rekaman (`recordedAt`),
-dan topik (`topics`) sudah final/faktual; A1 hanya tersisa ringkasan naratif.
+**Data konten: `summary` sengaja generik** (keputusan 5 Nov 2026 — pengunjung langsung menonton
+video). Judul, tanggal rekaman (`recordedAt`), dan topik (`topics`) untuk membuat konteks.
 
 ---
 
@@ -28,8 +27,11 @@ dan topik (`topics`) sudah final/faktual; A1 hanya tersisa ringkasan naratif.
 
 ### 🏷️ A. Konten (paling sering disebut — mulai dari sini)
 
-- [ ] **A1. Tulis ringkasan spesifik per Day** — `summary` di `days.ts` masih template generik.
-      Cukup 1–2 kalimat per video ("Day 4: wiring ESP32 pertama, kena error kabel TX-RX"). 🟢 mudah, 15 menit
+- [x] **A1. Tulis ringkasan spesifik per Day** — ✅ **ditutup dengan keputusan (5 Nov 2026):**
+      ringkasan generik dibiarkan — pengunjung langsung menonton video. Judul rapi, tanggal
+      rekaman, dan topik (A2) tetap menampilkan konteks tiap halaman. Kalau suatu saat ingin
+      revisi, tinggal edit field `summary` di days.ts (transkrip tergembok pot-token, jadi
+      jalur otomatis bukan pilihan).
 - [x] **A2. Tanggal publikasi per halaman** — ✅ selesai 5 Nov 2026: field `recordedAt` (ISO, WIB)
       & `topics` (dari hashtag deskripsi video) ditambah ke seluruh `Day` 1–16 via oEmbed/scrape
       judul+deskripsi; tampil sebagai `🗓 1 Okt 2026` + badge topik di tiap kartu buku.
@@ -87,6 +89,7 @@ dan topik (`topics`) sudah final/faktual; A1 hanya tersisa ringkasan naratif.
 |---|---|
 | **B2-lite** — dot navigasi window (tepi + ±2 + "…", mobile rapi) | [0.19.0] |
 | **A2** — tanggal rekaman + topik per halaman (recordedAt/topics dari metadata YouTube) | [0.18.0] |
+| **A1** — dinilai tidak diperlukan; summary generik divisakan (decision log) | [0.19.0]+docs |
 | **C1** prerender SEO + **C2** LICENSE MIT + **C3** GitHub Actions CI + **C5** debounce animasi | [0.17.0] |
 | Docker end-to-end terverifikasi live di VPS + README flow produksi (build lokal → scp → compose) & link live | [0.18.0]+docs |
 | Badge & subtitle landing dinamis dari `days.length` | `days.length` di `+page.svelte` ([0.8.0]) |
@@ -104,11 +107,11 @@ dan topik (`topics`) sudah final/faktual; A1 hanya tersisa ringkasan naratif.
 
 Kalau mau satu "sprint kecil minggu-minggu ini":
 
-1. ~~**A1** ringkasan spesifik 15 video~~ → **masih jadi #1** (butuh catatan Anda saat menonton ulang video)
-2. ~~**C1 prerender + C2 LICENSE + C3 CI**~~ ✅ selesai 5 Nov
+1. ~~**A1** ringkasan spesifik~~ ✅ ditutup — summary generik sengaja (lihat di atas)
+2. ~~**A2/C1/C2/C3/C5 B2-lite**~~ ✅ selesai 5 Nov
 3. **A3 playlist YouTube + D1 link-in-comment** — sebelum posting hero di LinkedIn
-4. **B2 TOC overlay** — saat merasa buku mulai menggelinding panjang (~Day 20)
-5. **B1 halaman detail** + **C4 build in-Docker** — ticket berikutnya
+4. **C4 build in-Docker** — `git pull && compose up` tanpa build manual; ticket teknis paling murah
+5. **B2 TOC overlay penuh** (~Day 20) lalu **B1 halaman detail**
 
-> Prinsip: **A1 dulu** — dokumen konten (`days.ts`) adalah satu-satunya file yang akan terus
-> disentuh manusia; panggil semua perubahan baru lewat sana dan biarkan komponen lain menyesuaikan sendiri.
+> Prinsip yang masih berlaku: **`days.ts` adalah satu-satunya file yang akan terus
+> disentuh manusia; semua perubahan baru masuk lewat sana** dan biarkan komponen lain menyesuaikan sendiri.

@@ -2,8 +2,8 @@
  * Data halaman "Jurnal Eksplorasi IoT".
  *
  * ⏰ PENGINGAT (dari docs/BACKLOG.md — update tiap kali buka file ini):
- *   - 🔴 [A1] Ringkasan per Day masih TEMPLATE GENERIK — sudah layak ditulis
- *     ringkasan spesifik per video (6–16, lalu tarik mundur ke 1–5) saat menonton ulang.
+ *   - ✅ A1 ringkasan naratif DITUTUP (5 Nov 2026): summary generik dipakai begitu saja —
+ *     pengunjung langsung menonton videonya; konteks datang dari judul + tanggal + topik.
  *   - 🟠 [B2] Overlay TOC/daftar isi — sebagai penjelajah konten layak di ±Day 20
  *     (sisi dot-nya sudah beres: dot window + "…" sejak 0.19.0).
  *   - [C1 prerender] [C2 LICENSE] [C3 CI] [C5 debounce] [A2 tanggal+topik] ✅ per 5 Nov 2026.
