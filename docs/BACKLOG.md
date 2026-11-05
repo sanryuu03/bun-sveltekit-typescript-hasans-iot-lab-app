@@ -11,7 +11,7 @@
 |---|---|
 | Jurnal | **16 halaman** (Day 1–16), semua video terverifikasi via YouTube oEmbed |
 | Stack | SvelteKit 3 · Svelte 5 (Runes dipaksa) · Tailwind CSS 4 · shadcn-svelte · Bun · Vite 8 |
-| Deploy | `adapter-node` + Docker multi-stage · `docker-compose` port **8098:3000** · container `hasans-iot-lab` |
+| Deploy | `adapter-node` + Docker multi-stage · `docker-compose` port **8098:3000** · container `hasans-iot-lab` · ✅ **live di VPS**: [hasans-iot-lab.muhammadhasan.my.id](https://hasans-iot-lab.muhammadhasan.my.id) |
 | SEO & CI | Landing **prerendered** (`+page.ts`) · LICENSE MIT · GitHub Actions CI (`check` + `build`) |
 | Kualitas | `bun run check` 0 error/0 warning · stress test `/stress` PASS (DOM selalu 1 card) · debounce C5 aktif (~690ms) |
 | Mobile | Muat satu layar di 390×844, tanpa overflow horizontal/vertikal |
@@ -58,8 +58,10 @@ dan topik (`topics`) sudah final/faktual; A1 hanya tersisa ringkasan naratif.
       → `bun run check` → `bun run build` pada setiap push/PR ke main.
 - [ ] **C4. Build di dalam Docker** — pattern sekarang menyalin `build/` hasil build manual di host
       (konsisten dengan `sveltekit-my-portfolio`); risiko: lupa menjalankan `bun run build` setelah edit kode.
-      Cara migrasinya: stage `oven/bun` menjalankan `bun run build` di dalam image; setelah itu
-      `docker compose up --build` tanpa langkah manual apa pun. 🟡 sedang
+      ✅ *Update 5 Nov 2026*: pattern tunggal ini **terverifikasi end-to-end di VPS** oleh Hasan —
+      `docker compose up -d --build` sukses, situs live & menjawab A2 metadata terbaru.
+      Yang tersisa: migrasi agar `bun run build` berjalan DI DALAM image (hilangkan langkah manual
+      di host; sehingga `git pull && docker compose up --build` langsung cukup). 🟡 sedang
 - [x] **C5. Debounce klik saat animasi di tengah jalan** — ✅ selesai 5 Nov 2026: guard `animating`
       di `Book.svelte` — commit navigasi diabaikan selama window animasi (~690ms). Dampak pada
       `/stress`: interval skenario di-naikkan ke 800ms supaya deterministik (sudah diverifikasi
