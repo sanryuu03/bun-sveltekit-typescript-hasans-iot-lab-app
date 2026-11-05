@@ -85,6 +85,11 @@ video). Judul, tanggal rekaman (`recordedAt`), dan topik (`topics`) untuk membua
       thumbnail Day 1, bukan URL telanjang. `og:image` pakai thumbnail YouTube (tanpa file host).
       ⚠️ Kalau preview WhatsApp masih jelek setelah deploy: cache — refresh via Facebook
       Sharing Debugger (Scrape Again). Detail di CHANGELOG [0.21.0].
+      ✅ **Terverifikasi live di WhatsApp 5 Nov 2026** (judul + deskripsi + gambar tampil).
+      💡 Saran lanjutan (opsional): buat `og-image.png` khusus **1200×630** (branded, rasio
+      1.91:1, tanpa letterbox) — thumbnail YouTube `hqdefault` (480×360) punya pita hitam
+      atas/bawah yang terlihat di preview. Kalau dibuat: simpan di `static/`, ganti URL
+      `og:image` & `twitter:image`, lalu hapus `og:image:width/height` lama.
 - [ ] **D2. Versi EN dari caption** — untuk audience lintas negara (opsional, pas waktu mulai punya
       viewer internasional). 🟢 mudah
 
