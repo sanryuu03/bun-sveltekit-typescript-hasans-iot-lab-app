@@ -64,12 +64,13 @@ video). Judul, tanggal rekaman (`recordedAt`), dan topik (`topics`) untuk membua
       README bagian Lisensi diperbarui + badge.
 - [x] **C3. GitHub Actions CI** — ✅ selesai 5 Nov 2026: `.github/workflows/ci.yml` — bun install
       → `bun run check` → `bun run build` pada setiap push/PR ke main.
-- [ ] **C4. Build di dalam Docker** — pattern sekarang menyalin `build/` hasil build manual di host
-      (konsisten dengan `sveltekit-my-portfolio`); risiko: lupa menjalankan `bun run build` setelah edit kode.
-      ✅ *Update 5 Nov 2026*: pattern tunggal ini **terverifikasi end-to-end di VPS** oleh Hasan —
-      `docker compose up -d --build` sukses, situs live & menjawab A2 metadata terbaru.
-      Yang tersisa: migrasi agar `bun run build` berjalan DI DALAM image (hilangkan langkah manual
-      di host; sehingga `git pull && docker compose up --build` langsung cukup). 🟡 sedang
+- [x] **C4. Build di dalam Docker** — ✅ **ditutup by decision (5 Nov 2026)**: Hasan tetap memilih
+      build manual di host (`bun run build` → scp → `docker compose up -d --build`) karena pola
+      itu sudah terbukti end-to-end di VPS & konsisten dengan `sveltekit-my-portfolio`.
+      Risiko "lupa build" sudah kecil: CI (`C3`) menjalankan `bun run build` di setiap push,
+      jadi kalau build gagal, kasusnya ketahuan sebelum sampai deploy.
+      Kalau suatu saat ingin revisi: migrasi `bun run build` ke dalam Dockerfile, hapus
+      `COPY build ./build`.
 - [x] **C5. Debounce klik saat animasi di tengah jalan** — ✅ selesai 5 Nov 2026: guard `animating`
       di `Book.svelte` — commit navigasi diabaikan selama window animasi (~690ms). Dampak pada
       `/stress`: interval skenario di-naikkan ke 800ms supaya deterministik (sudah diverifikasi
@@ -122,7 +123,7 @@ Kalau mau satu "sprint kecil minggu-minggu ini":
 2. ~~**A2/C1/C2/C3/C5 B2-lite A3 D3**~~ ✅ selesai 5 Nov
 3. **Deploy [0.19–0.21]** ke VPS — preview WhatsApp & fitur baru hidup (flow lengkap di README 🐳)
 4. **D1 link-in-comment LinkedIn** — pakai link playlist ([0.20.0]) saat posting
-5. **C4 build in-Docker** — `git pull && compose up` tanpa build manual; ticket teknis paling murah
+5. ~~**C4 build in-Docker**~~ ✅ ditutup by decision — build manual di host tetap dipakai (lihat checklist C)
 6. **B2 TOC overlay penuh** (~Day 20) lalu **B1 halaman detail**
 
 > Prinsip yang masih berlaku: **`days.ts` adalah satu-satunya file yang akan terus
