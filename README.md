@@ -140,11 +140,33 @@ docker compose up -d --build  # host :8098 → container :3000
 docker compose logs -f        # pantau log
 ```
 
-- `Dockerfile` multi-stage: `oven/bun:1-alpine` (install deps produksi + lockfile frozen) → `node:22-alpine` (`node build`).
+### Flow produksi di VPS (yang dipakai saat ini)
+
+Build dijalankan **di mesin lokal** (jauh lebih cepat & hemat resource VPS), lalu artefaknya
+di-salin ke VPS untuk di-bangun sebagai image Docker:
+
+```sh
+# 1. di mesin lokal — build fresh artefak adapter-node
+bun run build
+
+# 2. salin artefak minimum ke direktori repo di VPS
+#    (IP/port/direktori VPS adalah data Anda sendiri — isi langsung di terminal,
+#     JANGAN ditulis di repo publik)
+scp -P <PORT> -r build package*.json Dockerfile docker-compose.yaml root@<VPS_HOST>:/root/<direktori>/ 
+
+# 3. di VPS — bangun image + jalankan kontainer
+docker compose up -d --build
+```
+
+Hasil live: **[https://hasans-iot-lab.muhammadhasan.my.id](https://hasans-iot-lab.muhammadhasan.my.id)**
+
+Catatan menyeluruh:
+- Arsitekturnya memakai `Dockerfile` multi-stage: `oven/bun:1-alpine` (install deps produksi + lockfile frozen) → `node:22-alpine` (`node build`).
 - `docker-compose.yaml`: container `hasans-iot-lab`, `restart: always`, port **8098:3000**.
 - SvelteKit 3 butuh Node ≥ 22.17 — jangan downgrade ke `node:20` (project lama masih boleh, project ini tidak).
 - Ingin build di dalam container (tanpa `bun run build` manual)? Ubah stage `deps` menjadi build stage yang menjalankan `bun run build` lalu `COPY --from=build /app/build`. Pattern sekarang sengaja mengikuti project `sveltekit-my-portfolio` untuk konsistensi.
 - `.dockerignore` menjaga context kecil: yang dibutuhkan image hanya `package.json`, `bun.lock`, dan `build/`.
+- 💡 Karena kontainer menjalankan `build/` dari host (bukan build ulang di dalam image), kalau suatu waktu `git pull` di VPS di bagian repo tapi lupa membangun ulang `build/`, `docker compose up --build` akan diam-diam menjalankan kode **lama** — pastikan `bun run build` menghasilkan `build/` yang belum lama.
 
 ## 🧩 Catatan Khusus Proyek Ini
 
