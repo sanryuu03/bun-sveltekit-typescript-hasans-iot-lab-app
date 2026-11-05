@@ -15,7 +15,7 @@
 | SEO & CI | Landing **prerendered** (`+page.ts`) · LICENSE MIT · GitHub Actions CI (`check` + `build`) |
 | Kualitas | `bun run check` 0 error/0 warning · stress test `/stress` PASS (DOM selalu 1 card) · debounce C5 aktif (~690ms) |
 | Mobile | Muat satu layar di 390×844, tanpa overflow horizontal/vertikal |
-| Dokumentasi | README lengkap · `CHANGELOG.md` (terakhir `[0.18.0]`) · halaman ini |
+| Dokumentasi | README lengkap · `CHANGELOG.md` (terakhir `[0.19.0]`) · halaman ini |
 | Workflow tambah Day | edit `src/lib/data/days.ts` → `bun run check` → commit `feat: tambah Day N` → entri `CHANGELOG [0.N.0]` → `git push` |
 
 **Data konten yang masih "generik":** semua `summary` di `days.ts` masih kalimat template
@@ -78,16 +78,25 @@ dan topik (`topics`) sudah final/faktual; A1 hanya tersisa ringkasan naratif.
 
 ---
 
-## 3️⃣ Saran yang Sudah Dikerjakan ✅
+**3️⃣ Saran yang Sudah Dikerjakan ✅**
+
+<details>
+<summary>Daftar lengkap (klik untuk buka)</summary>
 
 | Saran | Dipenuhi di |
 |---|---|
+| **B2-lite** — dot navigasi window (tepi + ±2 + "…", mobile rapi) | [0.19.0] |
+| **A2** — tanggal rekaman + topik per halaman (recordedAt/topics dari metadata YouTube) | [0.18.0] |
+| **C1** prerender SEO + **C2** LICENSE MIT + **C3** GitHub Actions CI + **C5** debounce animasi | [0.17.0] |
+| Docker end-to-end terverifikasi live di VPS + README flow produksi (build lokal → scp → compose) & link live | [0.18.0]+docs |
 | Badge & subtitle landing dinamis dari `days.length` | `days.length` di `+page.svelte` ([0.8.0]) |
 | Halaman stress test manual (`/stress`) | [0.5.0] |
 | Fix ghost node (animasi manual CSS) + mobile | [0.5.0] |
 | Dokumentasi lengkap (README + CHANGELOG) | [0.3.0]+ |
 | Docker + adapter-node port 8098:3000 | [0.3.0] |
 | Favicon sesuai identitas (CPU hijau) | [0.3.0] |
+
+</details>
 
 ---
 

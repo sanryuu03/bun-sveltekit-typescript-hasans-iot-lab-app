@@ -2,7 +2,7 @@
  * Data halaman "Jurnal Eksplorasi IoT".
  *
  * ⏰ PENGINGAT (dari docs/BACKLOG.md — update tiap kali buka file ini):
- *   - 🔴 [A1] Ringkasan per Day masih TEMPLATE GENERIK — lumayan mulai ditulis
+ *   - 🔴 [A1] Ringkasan per Day masih TEMPLATE GENERIK — sudah layak ditulis
  *     ringkasan spesifik per video (6–16, lalu tarik mundur ke 1–5) saat menonton ulang.
  *   - 🟠 [B2] Overlay TOC/daftar isi — sebagai penjelajah konten layak di ±Day 20
  *     (sisi dot-nya sudah beres: dot window + "…" sejak 0.19.0).

@@ -79,10 +79,12 @@ Semua konten ada di `src/lib/data/days.ts`:
 
 ```ts
 export interface Day {
-	day: number;      // nomor halaman (1, 2, 3, …)
-	title: string;    // judul di halaman buku
-	summary: string;  // 1–2 kalimat ringkasan (di-clamp 2 baris)
-	videoId: string;  // ID YouTube — bagian ?v=… dari URL watch
+	day: number;         // nomor halaman (1, 2, 3, …)
+	title: string;       // judul di halaman buku
+	summary: string;     // 1–2 kalimat ringkasan (di-clamp 2 baris)
+	videoId: string;     // ID YouTube — bagian ?v=… dari URL watch
+	recordedAt: string;  // tanggal rekaman ISO `YYYY-MM-DD` (WIB) — dari timestamp di judul video
+	topics: string[];    // topik hari itu — dari hashtag deskripsi video (tanpa '#')
 }
 
 export const days: Day[] = [ /* … */ ];
@@ -90,14 +92,17 @@ export const days: Day[] = [ /* … */ ];
 
 - **Menambah/mengurangi hari**: cukup ubah isi array — jumlah dot, label halaman, navigasi, dan zona klik menyesuaikan otomatis.
 - **Cara ambil `videoId`**: dari `https://www.youtube.com/watch?v=`**`hbed7K6AWLA`** → `videoId: 'hbed7K6AWLA'`.
+- **Judul rapi**: ambil judul asli video dari [YouTube oEmbed](https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D<h>&format=json) sebelum dipakai.
+- **`recordedAt` & `topics`**: timestamp terlihat di judul video mentah (`1790872050 - day 1 …`); hashtag topik ada di deskripsi video. Keduanya tampil sebagai `🗓 <tanggal>` + badge di kartu.
 - Thumbnail otomatis dari `i.ytimg.com/vi/<videoId>/hqdefault.jpg` (tidak perlu disimpan lokal).
 - Ringkasan disarankan ≤ 2 baris (deskripsi akan dipangkas `line-clamp-2` di layar kecil).
+- ⏰ Di bagian atas `days.ts` ada pengingat backlog (A1 ringkasan spesifik, B2 TOC, dst.) — selalu cek saat mengedit.
 
 ## 📖 Arsitektur Buku (Book.svelte)
 
 ```
 <section> (w-min(92vw,660px))
- ├─ <nav> dot vertikal (desktop, absolute kanan)
+ ├─ <nav> dot vertikal window (desktop, absolute kanan)
  ├─ .book  [perspective 1800px]
  │   ├─ 2 layer tumpukan halaman (ilusi ketebalan)
  │   ├─ .grid (tiling: semua halaman menempati sel sama)
@@ -126,7 +131,8 @@ Pada versi Svelte yang dipakai saat ini, elemen lama terbukti tetap tertinggal d
 | `anim-reveal` | maju | halaman baru muncul halus di bawah daun |
 | `anim-fade-old` | mundur | halaman lama memudar di bawah daun |
 
-4. Setelah `640ms + 50ms`, `setTimeout` mengangkat `leaving` dari state → node lama dihapus dari DOM. Timer lama selalu di-`clearTimeout` setiap navigasi (aman untuk klik cepat beruntun).
+4. Setelah `640ms + 50ms`, `setTimeout` mengangkat `leaving` dari state → node lama dihapus dari DOM. Timer lama selalu di-`clearTimeout` setiap navigasi.
+5. **Guard C5**: selama window animasi (~690ms), `commit()` mengabaikan input navigasi baru (klik tepi, dot, keyboard) — animasi tidak bisa dipotong; pasti beres setelah window. Inilah alasan skenario `/stress` dipatok interval ≥ 800ms.
 
 **Jangan kembalikan ke `in:`/`out:` milik Svelte** kecuali bug tersebut sudah dikonfirmasi terperbaiki — gunakan cara manual ini.
 
