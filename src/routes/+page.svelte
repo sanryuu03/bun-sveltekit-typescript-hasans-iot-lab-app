@@ -16,6 +16,36 @@
 		name="description"
 		content="Jurnal eksplorasi IoT dalam bentuk buku interaktif — halaman per hari berisi dokumentasi video perjalanan eksperimen."
 	/>
+	<!-- D3 (docs/BACKLOG.md): preview link sosial (WhatsApp/LinkedIn/Telegram dst.) -->
+	<meta property="og:type" content="website" />
+	<meta property="og:site_name" content="Hasan's IoT Lab" />
+	<meta property="og:locale" content="id_ID" />
+	<meta property="og:url" content="https://hasans-iot-lab.muhammadhasan.my.id/" />
+	<meta property="og:title" content="Hasan's IoT Lab — Jurnal Eksplorasi IoT" />
+	<meta
+		property="og:description"
+		content="Buku interaktif berisi dokumentasi video perjalanan eksperimen IoT, satu halaman per hari — dari Arduino sampai ESP32."
+	/>
+	<meta
+		property="og:image"
+		content="https://i.ytimg.com/vi/6G12yiwCpFg/hqdefault.jpg"
+	/>
+	<meta property="og:image:width" content="480" />
+	<meta property="og:image:height" content="360" />
+	<meta
+		property="og:image:alt"
+		content="Halaman pertama dari buku jurnal eksplorasi IoT Hasan's IoT Lab"
+	/>
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="Hasan's IoT Lab — Jurnal Eksplorasi IoT" />
+	<meta
+		name="twitter:description"
+		content="Buku interaktif berisi dokumentasi video perjalanan eksperimen IoT, satu halaman per hari."
+	/>
+	<meta
+		name="twitter:image"
+		content="https://i.ytimg.com/vi/6G12yiwCpFg/hqdefault.jpg"
+	/>
 </svelte:head>
 
 <div class="relative flex min-h-svh flex-col overflow-hidden bg-background text-foreground">

@@ -5,6 +5,22 @@ Semua perubahan penting pada project **Hasan's IoT Lab** didokumentasikan di sin
 Format mengikuti [Keep a Changelog](https://keepachangelog.com/id-ID/1.1.0/),
 versi mengikuti [SemVer](https://semver.org/id/). Tanggal dalam format `d MMM yyyy` (WIB).
 
+## [0.21.0] — 5 Nov 2026
+
+### Added
+- **D3 · Preview link sosial (Open Graph)** — landing kini punya tag OG penuh + Twitter Card
+  di HTML prerender: `og:title` / `og:description` / `og:url` / `og:image` / `og:site_name` /
+  `og:locale=id_ID`, plus `twitter:card=summary_large_image`. `og:image` memakai thumbnail
+  YouTube video Day 1 (`hqdefault.jpg` 480×360 — selalu ada, tanpa perlu file host sendiri).
+  Efeknya: preview link di WhatsApp/LinkedIn/Telegram/Slack kini menampilkan **judul situs,
+  deskripsi, dan gambar kartu** — bukan lagi telanjang berupa URL saja.
+- Verifikasi: 14 tag OG/Twitter terverifikasi ada di `build/prerendered/index.html` (prerender),
+  smoke test produksi dari hasil build: `/` 200 + `og:title` terlayani dengan benar.
+
+> 📱 **Catatan cache WhatsApp**: preview lama bisa ter-cache ~beberapa hari. Setelah deploy,
+> paksa refresh lewat [Facebook Sharing Debugger](https://developers.facebook.com/tools/debug/)
+> (klik *Scrape Again*) atau tambahkan query kosong `?v=2` saat share pertama.
+
 ## [0.20.0] — 5 Nov 2026
 
 ### Added

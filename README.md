@@ -26,6 +26,7 @@ Landing page berbentuk **buku/album interaktif**: halaman per hari (jumlah mengi
 | 👆 Kenyamanan mobile | Tinggi halaman mengikuti isi (tanpa overflow), muat satu layar di 390×844 |
 | ▶️ Video lazy | Iframe YouTube baru dibuat saat tombol play diklik (hemat bandwidth, tidak ada autoplay paksa) |
 | 🔗 Mode `youtube-nocookie` | Privasi ramah + `rel=0`, `modestbranding=1` |
+| 📱 Preview link sosial | Tag **Open Graph + Twitter Card** penuh — share link ke WhatsApp/LinkedIn/Telegram tampil judul + deskripsi + gambar thumbnail Day 1 (bukan telanjang berupa URL) |
 | 📺 Playlist lengkap | Link **"Playlist lengkap · Day 1–N"** di footer → playlist YouTube berisi semua video jurnal berurutan (const `playlistUrl` di `days.ts`; regen saat Day baru) |
 | 🌗 Tema | Dark mode (dipaksa via `class="dark"` di `app.html`) dengan warna primary hijau tema |
 | ♿ Aksesibilitas | `aria-label` di seluruh kontrol, `aria-current` pada dot aktif, `svelte:head` title/meta description |

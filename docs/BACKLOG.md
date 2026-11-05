@@ -15,7 +15,7 @@
 | SEO & CI | Landing **prerendered** (`+page.ts`) · LICENSE MIT · GitHub Actions CI (`check` + `build`) |
 | Kualitas | `bun run check` 0 error/0 warning · stress test `/stress` PASS (DOM selalu 1 card) · debounce C5 aktif (~690ms) |
 | Mobile | Muat satu layar di 390×844, tanpa overflow horizontal/vertikal |
-| Dokumentasi | README lengkap · `CHANGELOG.md` (terakhir `[0.20.0]`) · halaman ini |
+| Dokumentasi | README lengkap · `CHANGELOG.md` (terakhir `[0.21.0]`) · halaman ini |
 | Workflow tambah Day | edit `src/lib/data/days.ts` → `bun run check` → commit `feat: tambah Day N` → entri `CHANGELOG [0.N.0]` → `git push` |
 
 **Data konten: `summary` sengaja generik** (keputusan 5 Nov 2026 — pengunjung langsung menonton
@@ -79,6 +79,11 @@ video). Judul, tanggal rekaman (`recordedAt`), dan topik (`topics`) untuk membua
 
 - [ ] **D1. Tautan YouTube di komentar (LinkedIn)** — post LinkedIn dengan link dalam teks cenderung
       di-throttle reach; konvensi yang terbukti: taruh link di **komentar pertama** sendiri. 🟢 mudah
+- [x] **D3. Preview link sosial (Open Graph)** — ✅ 5 Nov 2026: tag OG + Twitter Card penuh di
+      landing (prerender) — share ke WhatsApp/LinkedIn/Telegram tampil judul + deskripsi +
+      thumbnail Day 1, bukan URL telanjang. `og:image` pakai thumbnail YouTube (tanpa file host).
+      ⚠️ Kalau preview WhatsApp masih jelek setelah deploy: cache — refresh via Facebook
+      Sharing Debugger (Scrape Again). Detail di CHANGELOG [0.21.0].
 - [ ] **D2. Versi EN dari caption** — untuk audience lintas negara (opsional, pas waktu mulai punya
       viewer internasional). 🟢 mudah
 
@@ -92,6 +97,7 @@ video). Judul, tanggal rekaman (`recordedAt`), dan topik (`topics`) untuk membua
 | Saran | Dipenuhi di |
 |---|---|
 | **A3** — playlist lengkap YouTube (footer link + `playlistUrl`) | [0.20.0] |
+| **D3** — preview link sosial (Open Graph + Twitter Card, thumbnail Day 1) | [0.21.0] |
 | **B2-lite** — dot navigasi window (tepi + ±2 + "…", mobile rapi) | [0.19.0] |
 | **A2** — tanggal rekaman + topik per halaman (recordedAt/topics dari metadata YouTube) | [0.18.0] |
 | **A1** — dinilai tidak diperlukan; summary generik divisakan (decision log) | [0.19.0]+docs |
@@ -113,10 +119,11 @@ video). Judul, tanggal rekaman (`recordedAt`), dan topik (`topics`) untuk membua
 Kalau mau satu "sprint kecil minggu-minggu ini":
 
 1. ~~**A1** ringkasan spesifik~~ ✅ ditutup — summary generik sengaja (lihat di atas)
-2. ~~**A2/C1/C2/C3/C5 B2-lite A3**~~ ✅ selesai 5 Nov
-3. **D1 link-in-comment LinkedIn** — pakai link playlist ([0.20.0]) saat posting
-4. **C4 build in-Docker** — `git pull && compose up` tanpa build manual; ticket teknis paling murah
-5. **B2 TOC overlay penuh** (~Day 20) lalu **B1 halaman detail**
+2. ~~**A2/C1/C2/C3/C5 B2-lite A3 D3**~~ ✅ selesai 5 Nov
+3. **Deploy [0.19–0.21]** ke VPS — preview WhatsApp & fitur baru hidup (flow lengkap di README 🐳)
+4. **D1 link-in-comment LinkedIn** — pakai link playlist ([0.20.0]) saat posting
+5. **C4 build in-Docker** — `git pull && compose up` tanpa build manual; ticket teknis paling murah
+6. **B2 TOC overlay penuh** (~Day 20) lalu **B1 halaman detail**
 
 > Prinsip yang masih berlaku: **`days.ts` adalah satu-satunya file yang akan terus
 > disentuh manusia; semua perubahan baru masuk lewat sana** dan biarkan komponen lain menyesuaikan sendiri.
