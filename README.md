@@ -26,6 +26,7 @@ Landing page berbentuk **buku/album interaktif**: halaman per hari (jumlah mengi
 | 👆 Kenyamanan mobile | Tinggi halaman mengikuti isi (tanpa overflow), muat satu layar di 390×844 |
 | ▶️ Video lazy | Iframe YouTube baru dibuat saat tombol play diklik (hemat bandwidth, tidak ada autoplay paksa) |
 | 🔗 Mode `youtube-nocookie` | Privasi ramah + `rel=0`, `modestbranding=1` |
+| 📺 Playlist lengkap | Link **"Playlist lengkap · Day 1–N"** di footer → playlist YouTube berisi semua video jurnal berurutan (const `playlistUrl` di `days.ts`; regen saat Day baru) |
 | 🌗 Tema | Dark mode (dipaksa via `class="dark"` di `app.html`) dengan warna primary hijau tema |
 | ♿ Aksesibilitas | `aria-label` di seluruh kontrol, `aria-current` pada dot aktif, `svelte:head` title/meta description |
 
@@ -90,7 +91,7 @@ export interface Day {
 export const days: Day[] = [ /* … */ ];
 ```
 
-- **Menambah/mengurangi hari**: cukup ubah isi array — jumlah dot, label halaman, navigasi, dan zona klik menyesuaikan otomatis.
+- **Menambah/mengurangi hari**: cukup ubah isi array — jumlah dot, label halaman, navigasi, dan zona klik menyesuaikan otomatis. ⚠️ Saat menambah Day baru juga **regen `playlistUrl`** (lihat komentar di atas const-nya) agar playlist YouTube ikut berisi video terbaru.
 - **Cara ambil `videoId`**: dari `https://www.youtube.com/watch?v=`**`hbed7K6AWLA`** → `videoId: 'hbed7K6AWLA'`.
 - **Judul rapi**: ambil judul asli video dari [YouTube oEmbed](https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D<h>&format=json) sebelum dipakai.
 - **`recordedAt` & `topics`**: timestamp terlihat di judul video mentah (`1790872050 - day 1 …`); hashtag topik ada di deskripsi video. Keduanya tampil sebagai `🗓 <tanggal>` + badge di kartu.

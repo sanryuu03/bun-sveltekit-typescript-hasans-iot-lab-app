@@ -174,6 +174,14 @@ export function thumbnailUrl(videoId: string): string {
 	return `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
 }
 
+/** URL playlist semua video jurnal (Day 1–terakhir, utuh & berurutan).
+ *  Playlist anonim YouTube — dibangun via `watch_videos?video_ids=id1,id2,…`
+ *  (terverifikasi 16 entri 5 Nov 2026; dibuka dalam format watch+list agar panel playlist tampil).
+ *  Untuk menambah Day baru: regen ulang — kirim seluruh videoId ke URL tersebut, lalu ganti nilai. */
+export const playlistUrl =
+	'https://www.youtube.com/watch?v=6G12yiwCpFg&list=TLGGJTXIMAa-pNAwNTExMjAyNg';
+
+
 /** Label tanggal rekaman untuk tampilan — ISO `YYYY-MM-DD` → "1 Okt 2026" (WIB) */
 export function recordedAtLabel(recordedAt: string): string {
 	return new Date(`${recordedAt}T00:00:00+07:00`).toLocaleDateString('id-ID', {

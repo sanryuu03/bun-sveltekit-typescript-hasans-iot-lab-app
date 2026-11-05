@@ -2,8 +2,9 @@
 	import RiBookOpenLine from 'remixicon-svelte/icons/book-open-line';
 	import RiCpuLine from 'remixicon-svelte/icons/cpu-line';
 	import RiGithubLine from 'remixicon-svelte/icons/github-line';
+	import RiYoutubeLine from 'remixicon-svelte/icons/youtube-line';
 	import Book from '#lib/components/Book.svelte';
-	import { days } from '#lib/data/days';
+	import { days, playlistUrl } from '#lib/data/days';
 	import Badge from '#lib/components/ui/badge/badge.svelte';
 	import Button from '#lib/components/ui/button/button.svelte';
 	import Separator from '#lib/components/ui/separator/separator.svelte';
@@ -72,6 +73,18 @@
 				<Button variant="ghost" size="icon-xs" href="https://github.com/sanryuu03/bun-sveltekit-typescript-hasans-iot-lab-app" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
 					<RiGithubLine class="size-3.5" />
 				</Button>
+				<Separator orientation="vertical" class="h-4" />
+				<!-- A3 (docs/BACKLOG.md): playlist lengkap semua Day — tarik dari days.ts -->
+				<a
+					href={playlistUrl}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="inline-flex items-center gap-1 underline-offset-2 transition-colors hover:text-foreground"
+					aria-label="Playlist lengkap semua Day di YouTube"
+				>
+					<RiYoutubeLine class="size-3.5" />
+					Playlist lengkap · Day 1–{days.length}
+				</a>
 				<Separator orientation="vertical" class="h-4" />
 				<span>FullStackWith Hasan</span>
 			</div>

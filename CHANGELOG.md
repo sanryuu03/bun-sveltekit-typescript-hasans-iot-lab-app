@@ -5,6 +5,22 @@ Semua perubahan penting pada project **Hasan's IoT Lab** didokumentasikan di sin
 Format mengikuti [Keep a Changelog](https://keepachangelog.com/id-ID/1.1.0/),
 versi mengikuti [SemVer](https://semver.org/id/). Tanggal dalam format `d MMM yyyy` (WIB).
 
+## [0.20.0] — 5 Nov 2026
+
+### Added
+- **A3 · Playlist lengkap semua Day** — trik resmi YouTube `watch_videos?video_ids=` menyusun
+  playlist anonim permanen (`TLGGJTXIMAa-pNAwNTExMjAyNg`) berisi 16 video jurnal urut Day 1–16
+  (terverifikasi via browser: panel playlist 16 entri).
+- Footer landing kini punya link **"Playlist lengkap · Day 1–16"** (ikon YouTube, teks dinamis
+  dari `days.length`) — const `playlistUrl` di `days.ts` dengan komentar cara regen.
+- README: entri fitur playlist + pengingat regen `playlistUrl` saat menambah Day baru.
+
+### Fixed
+- Dev server 500 di `/` setelah menambah import ikon baru — penyebab: cache dep-optimizer Vite
+  (`node_modules/.vite`) basi; clear + restart dev server beres. Import path ikon dipastikan valid
+  (`remixicon-svelte` exports `./icons/*` → `dist/icons/*.svelte`); ikon `RiYoutubeLine` sendiri
+  tidak bermasalah.
+
 ## [0.19.0] — 5 Nov 2026
 
 ### Added

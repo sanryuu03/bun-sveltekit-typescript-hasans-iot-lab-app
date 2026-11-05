@@ -15,7 +15,7 @@
 | SEO & CI | Landing **prerendered** (`+page.ts`) · LICENSE MIT · GitHub Actions CI (`check` + `build`) |
 | Kualitas | `bun run check` 0 error/0 warning · stress test `/stress` PASS (DOM selalu 1 card) · debounce C5 aktif (~690ms) |
 | Mobile | Muat satu layar di 390×844, tanpa overflow horizontal/vertikal |
-| Dokumentasi | README lengkap · `CHANGELOG.md` (terakhir `[0.19.0]`) · halaman ini |
+| Dokumentasi | README lengkap · `CHANGELOG.md` (terakhir `[0.20.0]`) · halaman ini |
 | Workflow tambah Day | edit `src/lib/data/days.ts` → `bun run check` → commit `feat: tambah Day N` → entri `CHANGELOG [0.N.0]` → `git push` |
 
 **Data konten: `summary` sengaja generik** (keputusan 5 Nov 2026 — pengunjung langsung menonton
@@ -37,7 +37,11 @@ video). Judul, tanggal rekaman (`recordedAt`), dan topik (`topics`) untuk membua
       judul+deskripsi; tampil sebagai `🗓 1 Okt 2026` + badge topik di tiap kartu buku.
       Fitur baris README + helper `recordedAtLabel()` di `days.ts`. Verifikasi: SSR + fit mobile
       390×844 tetap 840px tanpa overflow. 🟢
-- [ ] **A3. Playlist YouTube "Day 1–15"** — satu link untuk semua video, memudahkan viewers & caption social. 🟢 mudah
+- [x] **A3. Playlist YouTube lengkap** — ✅ 5 Nov 2026: playlist semua video (Day 1–16) via
+      trik resmi `watch_videos?video_ids=` — YouTube menyusun playlist anonim permanen
+      (`TLGGJTXIMAa-pNAwNTExMjAyNg`), terverifikasi 16 entri urut. Link tampil di footer
+      landing ("Playlist lengkap · Day 1–N", dinamis dari `days.length`), const `playlistUrl`
+      di `days.ts`. ⚠️ Regen saat Day baru ditambah (komentar di atas const).
 
 ### 🧭 B. Navigasi & Struktur (mulai dipikirkan saat halaman makin panjang)
 
@@ -87,6 +91,7 @@ video). Judul, tanggal rekaman (`recordedAt`), dan topik (`topics`) untuk membua
 
 | Saran | Dipenuhi di |
 |---|---|
+| **A3** — playlist lengkap YouTube (footer link + `playlistUrl`) | [0.20.0] |
 | **B2-lite** — dot navigasi window (tepi + ±2 + "…", mobile rapi) | [0.19.0] |
 | **A2** — tanggal rekaman + topik per halaman (recordedAt/topics dari metadata YouTube) | [0.18.0] |
 | **A1** — dinilai tidak diperlukan; summary generik divisakan (decision log) | [0.19.0]+docs |
@@ -108,8 +113,8 @@ video). Judul, tanggal rekaman (`recordedAt`), dan topik (`topics`) untuk membua
 Kalau mau satu "sprint kecil minggu-minggu ini":
 
 1. ~~**A1** ringkasan spesifik~~ ✅ ditutup — summary generik sengaja (lihat di atas)
-2. ~~**A2/C1/C2/C3/C5 B2-lite**~~ ✅ selesai 5 Nov
-3. **A3 playlist YouTube + D1 link-in-comment** — sebelum posting hero di LinkedIn
+2. ~~**A2/C1/C2/C3/C5 B2-lite A3**~~ ✅ selesai 5 Nov
+3. **D1 link-in-comment LinkedIn** — pakai link playlist ([0.20.0]) saat posting
 4. **C4 build in-Docker** — `git pull && compose up` tanpa build manual; ticket teknis paling murah
 5. **B2 TOC overlay penuh** (~Day 20) lalu **B1 halaman detail**
 
