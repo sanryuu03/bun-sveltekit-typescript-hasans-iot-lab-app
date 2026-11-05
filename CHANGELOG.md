@@ -12,7 +12,7 @@ versi mengikuti [SemVer](https://semver.org/id/). Tanggal dalam format `d MMM yy
   rekaman WIB, dari timestamp judul video) dan `topics` (dari hashtag deskripsi YouTube)
   untuk Day 1–16 — ditarik otomatis via oEmbed + scrape deskripsi.
 - Kartu buku menampilkan `🗓 <tanggal>` + badge topik (`arduino`, `esp32`, `touch-sensor`,
-  `servo`, `sg90`, `motor-sensor`...).
+  `servo`, `sg90`, `motor-servo`...).
 - Helper `recordedAtLabel()` untuk format tanggal id-ID.
 - Verifikasi: `svelte-check` bersih, SSR HTML memuat tanggal/topik, fit mobile 390×844
   tetap 840px tanpa overflow, sweep 3 halaman jalan normal.
