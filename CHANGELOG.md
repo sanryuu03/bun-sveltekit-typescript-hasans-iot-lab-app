@@ -5,6 +5,17 @@ Semua perubahan penting pada project **Hasan's IoT Lab** didokumentasikan di sin
 Format mengikuti [Keep a Changelog](https://keepachangelog.com/id-ID/1.1.0/),
 versi mengikuti [SemVer](https://semver.org/id/). Tanggal dalam format `d MMM yyyy` (WIB).
 
+## [0.22.0] — 7 Nov 2026
+
+### Added
+- **Day 17** — `KWfvOu_XL9k` ("1793788020 - day 17 perjalanan eksplorasi IoT"),
+  `recordedAt` 2026-11-04 (dari timestamp judul), topik `hc-sr04` + `ultrasonik`
+  (dari hashtag deskripsi). Judul diverifikasi via oEmbed sebelum masuk.
+- **Playlist regen** — playlist baru 17 entri: `TLGG6OQ-z3xw2bMwNzExMjAyNg`
+  (terverifikasi: 17 blok panel di data watch + seluruh 17 videoId hadir, Day 17 di urutan awal).
+  Footer landing otomatis menampilkan "Playlist lengkap · Day 1–17".
+- Verifikasi: `svelte-check` 0 error · build OK · `/` & `/stress` 200 · badge "Jurnal Eksplorasi · 17 Hari".
+
 ## [0.21.0] — 5 Nov 2026
 
 ### Added

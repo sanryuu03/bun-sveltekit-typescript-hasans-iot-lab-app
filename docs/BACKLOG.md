@@ -15,7 +15,7 @@
 | SEO & CI | Landing **prerendered** (`+page.ts`) · LICENSE MIT · GitHub Actions CI (`check` + `build`) |
 | Kualitas | `bun run check` 0 error/0 warning · stress test `/stress` PASS (DOM selalu 1 card) · debounce C5 aktif (~690ms) |
 | Mobile | Muat satu layar di 390×844, tanpa overflow horizontal/vertikal |
-| Dokumentasi | README lengkap · `CHANGELOG.md` (terakhir `[0.21.0]`) · halaman ini |
+| Dokumentasi | README lengkap · `CHANGELOG.md` (terakhir `[0.22.0]`) · halaman ini |
 | Workflow tambah Day | edit `src/lib/data/days.ts` → `bun run check` → commit `feat: tambah Day N` → entri `CHANGELOG [0.N.0]` → `git push` |
 
 **Data konten: `summary` sengaja generik** (keputusan 5 Nov 2026 — pengunjung langsung menonton
