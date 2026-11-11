@@ -5,6 +5,21 @@ Semua perubahan penting pada project **Hasan's IoT Lab** didokumentasikan di sin
 Format mengikuti [Keep a Changelog](https://keepachangelog.com/id-ID/1.1.0/),
 versi mengikuti [SemVer](https://semver.org/id/). Tanggal dalam format `d MMM yyyy` (WIB).
 
+## [0.23.0] — 11 Nov 2026
+
+### Added
+- **Day 18** — `1HBxfcAU6No` ("1794021420 - day 18 perjalanan eksplorasi IoT"),
+  `recordedAt` 2026-11-07 (dari timestamp judul), topik `botfather` + `esp32`
+  (dari hashtag deskripsi). Judul diverifikasi via oEmbed sebelum masuk.
+- **Playlist regen** — playlist baru 18 entri: `TLGGR_M68-d0Ir8xMTExMjAyNg`
+  (terverifikasi: 18 blok panel + seluruh 18 videoId hadir). Footer otomatis
+  "Playlist lengkap · Day 1–18".
+- Verifikasi: `svelte-check` 0 error · build OK · `/` & `/stress` 200 · badge "Jurnal Eksplorasi · 18 Hari".
+
+> 🧭 **Sampel sudah 18 halaman** — sesuai catatan di header `days.ts`, **B1 (route detail
+> `/day/[n]`)** kini layak masuk antrian berikutnya (saat ini masih opsional; landing tetap
+> fungsional penuh).
+
 ## [0.22.0] — 7 Nov 2026
 
 ### Added

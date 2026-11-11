@@ -8,7 +8,8 @@
  *     (sisi dot-nya sudah beres: dot window + "…" sejak 0.19.0).
  *   - [C1 prerender] [C2 LICENSE] [C3 CI] [C5 debounce] [A2 tanggal+topik] ✅ per 5 Nov 2026.
  *     (A2: recordedAt & topics diisi otomatis dari timestamp judul + hashtag deskripsi video
- *     via oEmbed/scrape utk seluruh Day 1–17 — Day baru WAJIB ikut mengisi dua field ini.)
+ *     via oEmbed/scrape utk seluruh Day 1–18 — Day baru WAJIB ikut mengisi dua field ini.)
+ *   - 🧭 SAMPAI 18 HALAMAN (7 Nov): B1 (route detail /day/[n]) kini layak masuk antrian.
  *   - Kalau sudah 18 halaman: mulai pertimbangkan B1 (route detail /day/[n]).
  *
  * Untuk menambah Day: cukup tambah entri di bawah (isi day/title/summary/videoId/
@@ -170,6 +171,14 @@ export const days: Day[] = [
 		recordedAt: '2026-11-04',
 		topics: ['hc-sr04', 'ultrasonik'],
 	},
+	{
+		day: 18,
+		title: 'Perjalanan Eksplorasi IoT — Hari Kedelapan Belas',
+		summary: 'Dokumentasi video hari kedelapan belas perjalanan eksplorasi IoT di Hasan\'s IoT Lab.',
+		videoId: '1HBxfcAU6No',
+		recordedAt: '2026-11-07',
+		topics: ['botfather', 'esp32'],
+	},
 ];
 
 /** URL watch YouTube dari ID video */
@@ -184,10 +193,10 @@ export function thumbnailUrl(videoId: string): string {
 
 /** URL playlist semua video jurnal (Day 1–terakhir, utuh & berurutan).
  *  Playlist anonim YouTube — dibangun via `watch_videos?video_ids=id1,id2,…`
- *  (terverifikasi 17 entri 7 Nov 2026; dibuka dalam format watch+list agar panel playlist tampil).
+ *  (terverifikasi 18 entri 11 Nov 2026; dibuka dalam format watch+list agar panel playlist tampil).
  *  Untuk menambah Day baru: regen ulang — kirim seluruh videoId ke URL tersebut, lalu ganti nilai. */
 export const playlistUrl =
-	'https://www.youtube.com/watch?v=6G12yiwCpFg&list=TLGG6OQ-z3xw2bMwNzExMjAyNg';
+	'https://www.youtube.com/watch?v=6G12yiwCpFg&list=TLGGR_M68-d0Ir8xMTExMjAyNg';
 
 
 /** Label tanggal rekaman untuk tampilan — ISO `YYYY-MM-DD` → "1 Okt 2026" (WIB) */
